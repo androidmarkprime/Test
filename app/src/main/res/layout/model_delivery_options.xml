@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/ll_delivery_options"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:gravity="center"
+    android:background="@drawable/ticket_deliver_white">
+
+    <ImageView
+        android:id="@+id/iv_delivery_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:padding="5dp"
+        android:background="@drawable/ticket_deliver_blue_rounded"
+        android:src="@mipmap/icn_rapid_scan"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="5dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_delivery_name"
+            android:textStyle="bold"
+            android:text="name"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_delivery_description"
+            android:text="description, description"
+            android:textSize="13sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_delivery_price"
+            android:textSize="13sp"
+            android:text="cost £1.00"
+            android:layout_marginStart="10dp"/>
+
+
+    </LinearLayout>
+</LinearLayout>

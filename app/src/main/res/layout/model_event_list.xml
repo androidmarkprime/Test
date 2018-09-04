@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:id="@+id/fl_event_list">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/ll_parent"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimaryDark">
+
+            <com.github.siyamed.shapeimageview.RoundedImageView
+                android:id="@+id/event_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                app:siBorderColor="@android:color/black"
+                app:siBorderWidth="0dp"
+                app:siRadius="10dp"
+                app:siSquare="true" />
+
+        <TextView
+            android:id="@+id/event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/event_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="30dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom">
+
+            <ImageView
+                android:layout_width="14sp"
+                android:layout_height="14sp"
+                android:id="@+id/event_location_icon"
+                android:src="@drawable/icn_small_location"/>
+
+            <TextView
+                android:id="@+id/event_venue_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:paddingStart="3dp"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/event_venue_town_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="1sp"
+                android:text=", "
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/event_venue_town"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="4sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+  </LinearLayout>
+
+
+</FrameLayout>

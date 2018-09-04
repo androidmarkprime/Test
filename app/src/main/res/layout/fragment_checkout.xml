@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/checkout_ll"
+    android:background="@color/browser_actions_bg_grey"
+    tools:context=".Checkout.CheckoutFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery"
+                android:id="@+id/tv_delivery_info"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/re_delivery"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp">
+            </android.support.v7.widget.RecyclerView>
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_extras_text"
+                android:text="@string/extras"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/ll_extras_container"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_extras_1_container">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ll_cd_container"
+                        android:background="@drawable/extras_turq_rounded"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="3">
+
+                        <CheckBox
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/cb_extras_1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:id="@+id/tv_extras_1"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/charity"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_extras_1_price"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_weight="1"
+                            android:text="£1.00"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/btn_extras_1_info"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="@color/Turq"
+                        android:layout_gravity="center_vertical"
+                        android:background="@mipmap/icn_help"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_extras_2_container">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ll_rp_container"
+                        android:background="@drawable/extras_turq_rounded"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="3">
+
+                        <CheckBox
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="5dp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/cb_extras_2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/tv_extras_2"
+                            android:textColor="@color/colorPrimary"
+                            android:text="@string/refund_protection"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/tv_extras_2_price"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_weight="1"
+                            android:text="£1.00"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/btn_extras_2_info"
+                        android:layout_marginEnd="5dp"
+                        android:backgroundTint="@color/Turq"
+                        android:layout_gravity="center_vertical"
+                        android:background="@mipmap/icn_help"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_summary_info"
+                android:text="@string/summary"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/re_summary">
+        </android.support.v7.widget.RecyclerView>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:id="@+id/iv_subtotal_divider"
+                android:src="@drawable/item_divider_grey"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_total_container"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_total_description"
+                    android:textStyle="bold"
+                    android:layout_weight="4"
+                    android:text="Total"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_total_total"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="£99.99"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/payment"
+                android:id="@+id/tv_payment_info"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorPrimary"
+                android:id="@+id/ll_payment_container"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_gpay_container"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/iv_gpay_icon"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="5dp"
+                        android:src="@mipmap/icn_gpay"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/tv_gpay_text"
+                        android:text="@string/gpay"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_card_conatiner"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/iv_card_icon"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="5dp"
+                        android:src="@mipmap/icn_card_placeholder"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_card_text"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/card"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_card_input_conatiner"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="20dp">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_card_input_text"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="15dp"
+                        android:hint="@string/card_number"
+                        android:layout_marginEnd="10dp"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_card_input_date"
+                        android:textSize="15dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:hint="@string/card_date"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_comms_title"
+                android:textStyle="bold"
+                android:text="@string/communications"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_comms_preferences"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opt_out"
+                    android:id="@+id/tv_opt_out"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/re_opt_out_choices"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp">
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_comms_detail"
+                android:text="@string/terms"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorAccent"
+                android:id="@+id/pay_button_ll">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_pay_amount"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:padding="15dp"
+                    android:visibility="visible"
+                    android:text="@string/pay_amount"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

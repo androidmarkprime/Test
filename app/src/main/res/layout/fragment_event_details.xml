@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    tools:context=".EventDetails.EventDetailsFragment">
+
+
+    <com.github.florent37.parallax.ScrollView
+        android:id="@+id/scroller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="40dp"
+        android:visibility="visible"
+        app:parallaxVertical="1.1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+    <com.github.siyamed.shapeimageview.RoundedImageView
+        android:id="@+id/event_details_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingBottom="20dp"
+        app:siBorderColor="@android:color/darker_gray"
+        app:siBorderWidth="0dp"
+        app:siRadius="0dp"
+        app:siSquare="true"
+        android:tag="parallax=0.3"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/Grey"
+            android:layout_marginBottom="2dp">
+
+    <TextView
+        android:id="@+id/event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"
+        android:paddingStart="20dp"
+        android:text="Event Name"
+        android:textColor="@color/colorPrimary"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/event_date_info"
+                android:paddingStart="20dp"
+                android:paddingBottom="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/calendar"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    android:src="@drawable/ic_calendar_small_white"/>
+
+                <TextView
+                    android:id="@+id/event_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:text="date"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingStart="24dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/clock"
+                android:src="@drawable/ic_clock_small_white"/>
+
+
+            <TextView
+        android:id="@+id/doors_open_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+                android:paddingStart="13dp"
+        android:paddingEnd="8dp"
+        android:text="@string/Open"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/doors_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textAllCaps="true"
+        android:text="open @"
+        android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/doors_close_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:text="-"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/doors_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:text="close @"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/doors_last_entry_info_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingStart="2dp"
+                android:paddingEnd="8dp"
+                android:text=","
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/doors_last_entry_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingEnd="10dp"
+                android:visibility="visible"
+                android:text="@string/last_entry"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/last_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:visibility="visible"
+                android:text="last entry @"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/event_age_info"
+                android:paddingStart="24dp"
+                android:paddingBottom="8dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/age_advisory"
+                    android:src="@drawable/ic_hand_small_white"/>
+
+                <TextView
+                    android:id="@+id/event_ages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:paddingStart="14dp"
+                    android:text="@string/Age"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/event_min_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:paddingStart="8dp"
+                    android:text="age"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/event_age_info_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="10dp"
+                    android:text="+"
+                    android:textColor="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp">
+
+        <TextView
+            android:id="@+id/event_description_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"
+            android:paddingStart="20dp"
+            android:text="@string/event_description"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/event_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:paddingBottom="5dp"
+            android:paddingStart="20dp"
+            android:text="Event Description"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/artist_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"
+            android:text="@string/line_up"
+            android:paddingStart="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="visible"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/re_artist_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:visibility="visible">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/genre_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"
+            android:text="@string/genres"
+            android:paddingStart="20dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="visible"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/re_genre_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:paddingEnd="20dp"
+                android:id="@+id/share_group">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_messenger"
+                    android:scaleX="0.65"
+                    android:scaleY="0.65"
+                    android:src="@drawable/ic_share_messenger"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_whatsApp"
+                    android:scaleX="0.65"
+                    android:scaleY="0.65"
+                    android:src="@drawable/ic_share_whatsapp"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_fb"
+                    android:scaleX="0.65"
+                    android:scaleY="0.65"
+                    android:src="@drawable/ic_share_facebook"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/share_twitter"
+                    android:scaleX="0.65"
+                    android:scaleY="0.65"
+                    android:src="@drawable/ic_share_twitter"
+                    />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/share_general"
+                    android:src="@drawable/ic_share_general"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+        android:paddingStart="20dp"
+            android:background="@color/colorPrimary"
+        android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="10dp">
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rl_map_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="140dp">-->
+
+                <!--<fragment-->
+                    <!--android:id="@+id/map"-->
+                    <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="140dp"-->
+                    <!--tools:context="com.skiddle.androidapps.skiddle.home.HomeActivity" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/ll_map_container"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:clickable="true"-->
+                    <!--android:orientation="vertical" />-->
+
+            <!--</RelativeLayout>-->
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/location_icon"
+                android:src="@drawable/icn_small_location" />
+
+                <TextView
+                    android:id="@+id/venue_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:text="Venue Name"/>
+
+
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/venue_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingStart="23sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Venue Address"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/venue_town"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingStart="23sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Venue Town"/>
+
+            <TextView
+                android:id="@+id/venue_pc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingStart="5sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Venue Postcode"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:gravity="center"
+                android:id="@+id/venue_phone_group">
+
+                <ImageView
+                    android:id="@+id/venue_phone_number"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/edt_icon_mobile"/>
+
+                <TextView
+                    android:id="@+id/venue_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="130dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="+000000000"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/colorAccent"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12dp"
+                    android:text="@string/directions" />
+
+            </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
+
+        </RelativeLayout>
+
+    </com.github.florent37.parallax.ScrollView>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    android:gravity="center"
+    android:background="@color/colorPrimary">
+
+    <Button
+        android:id="@+id/buy_tickets_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openCheckOutFragment"
+        android:text="@string/buy"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/colorAccent"
+        android:visibility="visible"/>
+</LinearLayout>
+
+
+</RelativeLayout>
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_opt_out">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="@drawable/background_rounded_grey"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+        <CheckBox
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:id="@+id/checkbox"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_opt_out"
+            android:textSize="13sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="I'd prefer NOT to receive a weekly personalised events guide"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

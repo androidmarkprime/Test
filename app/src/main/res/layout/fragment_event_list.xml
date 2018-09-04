@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.florent37.parallax.ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:visibility="visible"
+    app:parallaxVertical="1.1">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/re_event_list">
+
+    </android.support.v7.widget.RecyclerView>
+
+</com.github.florent37.parallax.ScrollView>
