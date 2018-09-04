@@ -33,7 +33,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private LinearLayout checkout_ll, ll_extras_container,
             ll_card_conatiner, ll_payment_container, ll_gpay_container, ll_extras_1_container,
             ll_extras_2_container, pay_button_ll, ll_cd_container, ll_rp_container,
-            ll_card_input_conatiner, ll_comms_preferences;
+            ll_card_input_conatiner, ll_comms_preferences,ll_delivery_options;
     private RecyclerView re_delivery, re_summary, re_opt_out_choices;
     private ImageView iv_gpay_icon, iv_card_icon;
     private TextView tv_delivery_info, tv_payment_info, tv_gpay_text, tv_card_text, tv_extras_text,
@@ -131,8 +131,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         llm_del.setOrientation(LinearLayoutManager.HORIZONTAL);
         re_delivery.setLayoutManager(llm_del);
 
-        re_delivery.setOnClickListener(this);
-
 
         re_opt_out_choices = view.findViewById(R.id.re_opt_out_choices);
         LinearLayoutManager llm_opt = new LinearLayoutManager(context);
@@ -174,11 +172,13 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         ll_card_input_conatiner = view.findViewById(R.id.ll_card_input_conatiner);
         ll_comms_preferences = view.findViewById(R.id.ll_comms_preferences);
 
+
         ll_cd_container.setOnClickListener(this);
         ll_rp_container.setOnClickListener(this);
         ll_gpay_container.setOnClickListener(this);
         ll_card_conatiner.setOnClickListener(this);
         ll_comms_preferences.setOnClickListener(this);
+
 
     }
 
@@ -384,18 +384,22 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
     public void deliveryClicked(DeliveryObject deliveryObject) {
 
+        removeItemFromList("RapidScan");
+        removeItemFromList("Posted");
+        removeItemFromList("Collect");
 
 
-        if (deliveryObject.getTv_delivery_description().contains("RapidScan")){
+        if (deliveryObject.getTv_delivery_name().contains("RapidScan")){
 
             RapidScan = true;
             Posted = false;
             Collect = false;
 
+
             paymentObject.add(new PaymentObject("    ", "RapidScan", "£0.50"));
             setSummaryAdapter(paymentObject);
 
-        }else if (deliveryObject.getTv_delivery_description().contains("Posted")){
+        }else if (deliveryObject.getTv_delivery_name().contains("Posted")){
 
             RapidScan = false;
             Posted = true;
@@ -404,21 +408,21 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             paymentObject.add(new PaymentObject("    ", "Posted", "£3.99"));
             setSummaryAdapter(paymentObject);
 
-        } else{
+        } else if (deliveryObject.getTv_delivery_name().contains("Collect")){
 
-            RapidScan = false;
-            Posted = false;
             Collect = true;
+            Posted = false;
+            RapidScan = false;
+
 
             paymentObject.add(new PaymentObject("    ", "Collect", "£1.00"));
             setSummaryAdapter(paymentObject);
 
-
-
+        } else {
+            removeItemFromList("RapidScan");
+            removeItemFromList("Posted");
+            removeItemFromList("Collect");
         }
-
-
-
 
     }
 

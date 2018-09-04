@@ -25,7 +25,7 @@ public class DeliveryObject extends Drawable{
         return iv_delivery_image;
     }
 
-    public String setTv_delivery_name() {
+    public String getTv_delivery_name() {
         return tv_delivery_name;
     }
 

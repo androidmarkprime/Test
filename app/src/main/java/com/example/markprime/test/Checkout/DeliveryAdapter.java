@@ -37,10 +37,10 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final DeliveryAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final DeliveryAdapter.ViewHolder holder, final int position) {
 
         holder.iv_delivery_image.setImageDrawable(deliveryObjects.get(position).getIv_delivery_image());
-        holder.tv_delivery_name.setText(deliveryObjects.get(position).setTv_delivery_name());
+        holder.tv_delivery_name.setText(deliveryObjects.get(position).getTv_delivery_name());
         holder.tv_delivery_description.setText(deliveryObjects.get(position).getTv_delivery_description());
         holder.tv_delivery_price.setText(deliveryObjects.get(position).getTv_delivery_price());
 
@@ -48,6 +48,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 deliveryAdapterListener.deliveryClicked(deliveryObjects.get(holder.getAdapterPosition()));
+                holder.ll_delivery_options.setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_seleted));
             }
         });
     }
