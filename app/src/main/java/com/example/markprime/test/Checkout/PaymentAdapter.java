@@ -64,16 +64,23 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
             }
     }
 
-//    public static void addPaymentLinetoSummary() {
-//
-//
-//
-//
-//    }
+    public double getTotalAmount(){
+        double totalCost = 0;
 
-    public static void removePaymentLineFromSummary() {
-
-
+        for(int i = 0; i < paymentObjects.size(); i++){
+            double totalTicketCost = (Double.parseDouble(paymentObjects.get(i).getTv_ticket_subtotal()));
+                totalCost = totalCost + totalTicketCost;
+            }
+        return totalCost;
+        }
+//        if(totalCost > 0 && !charityDonationOrRefundProtectionAdded){
+//            for(int i = 0; i < paymentObjects.size(); i++){
+//                if(paymentObjects.get(i).ticketName.equalsIgnoreCase("RapidScan")){
+//                    totalCost = totalCost + paymentObjects.get(i).deliveryCostIfNoFree;
+//                }
+//            }
+//        }
+//        totalAmount = totalCost;
+//        return totalCost;
     }
 
-}

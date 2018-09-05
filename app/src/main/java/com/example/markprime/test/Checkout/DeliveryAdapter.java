@@ -20,6 +20,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
     private Context context;
     private List<DeliveryObject> deliveryObjects;
     private DeliveryAdapterListener deliveryAdapterListener;
+    public boolean RapidScan = false, Posted = false, Collect = false;
 
     public DeliveryAdapter (Context context, List<DeliveryObject> deliveryObjects, DeliveryAdapterListener deliveryAdapterListener){
         this.context = context;
@@ -45,13 +46,94 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
         holder.tv_delivery_price.setText(deliveryObjects.get(position).getTv_delivery_price());
 
         holder.ll_delivery_options.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View view) {
+
+
                 deliveryAdapterListener.deliveryClicked(deliveryObjects.get(holder.getAdapterPosition()));
-                holder.ll_delivery_options.setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_seleted));
+
+
+                if(deliveryObjects.get(holder.getAdapterPosition()).getTv_delivery_name().contains("RapidScan")){
+
+
+                    if(!RapidScan){
+
+                        RapidScan = true; Posted = false; Collect = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_seleted));
+
+                    } else {
+
+                        RapidScan = false; Posted = false; Collect = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_white));
+
+                    }
+
+                } else if (deliveryObjects.get(holder.getAdapterPosition()).getTv_delivery_name().contains("Posted")){
+
+                    if(!Posted){
+
+                        Posted = true; RapidScan = false; Collect = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_seleted));
+
+                    } else {
+
+                        RapidScan = false; Posted = false; Collect = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_white));
+
+                    }
+
+                } else if (deliveryObjects.get(holder.getAdapterPosition()).getTv_delivery_name().contains("Collect")){
+
+                    if(!Collect){
+
+                        Collect = true; RapidScan = false; Posted = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_seleted));
+
+                    } else {
+
+                        RapidScan = false; Posted = false; Collect = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_white));
+
+                    }
+
+                    } else {
+
+                        RapidScan = false; Posted = false; Collect = false;
+
+                        holder.ll_delivery_options.setBackground(
+                                context.getResources().getDrawable(
+                                        R.drawable.ticket_deliver_white));
+
+                    }
             }
         });
+
     }
+
+
+
+
 
     @Override
     public int getItemCount() {
@@ -76,4 +158,5 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.ViewHo
             ll_delivery_options = itemView.findViewById(R.id.ll_delivery_options);
         }
     }
+
 }

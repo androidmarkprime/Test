@@ -38,7 +38,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private ImageView iv_gpay_icon, iv_card_icon;
     private TextView tv_delivery_info, tv_payment_info, tv_gpay_text, tv_card_text, tv_extras_text,
             tv_extras_1, tv_extras_1_price, tv_extras_2, tv_extras_2_price, tv_summary_info, tv_comms_title,
-            tv_opt_out, tv_comms_detail, tv_pay_amount;
+            tv_opt_out, tv_comms_detail, tv_pay_amount, tv_total_total;
     private CheckBox cb_extras_1, cb_extras_2;
     private Button btn_extras_1_info, btn_extras_2_info;
     private LinearLayoutManager llm_del, llm_sum, llm_opt;
@@ -49,6 +49,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private boolean refundProtectionEnabled = false, charityDonationEnabled = false;
     private boolean payWithCard = false, payWithGoogle = false;
     private boolean RapidScan = false, Posted = false, Collect = false;
+    private double totalPrice = 0.00;
 
     private List<PaymentObject> paymentObject = new ArrayList<>();
     private List<DeliveryObject> deliveryObject = new ArrayList<>();
@@ -204,10 +205,13 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         tv_opt_out = view.findViewById(R.id.tv_opt_out);
         tv_comms_detail = view.findViewById(R.id.tv_comms_detail);
         tv_pay_amount = view.findViewById(R.id.tv_pay_amount);
+        tv_total_total=view.findViewById(R.id.tv_total_total);
 
         tv_opt_out.setOnClickListener(this);
         tv_comms_detail.setOnClickListener(this);
         tv_comms_title.setOnClickListener(this);
+
+        setTotalPrice();
     }
 
     private void setupButtons(View view){
@@ -270,15 +274,12 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     }
 
     public void removeCharityDonationFromSummary() {
-
         removeItemFromList("Charity Donation");
-
-    }
+   }
 
 
 
     private void refundProtectionClicked() {
-
         if(!refundProtectionEnabled){
             setRefundEnabledSelected();
             refundProtectionEnabled = true;
@@ -288,7 +289,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
                     context.getResources().getDrawable(R.drawable.extras_turq_rounded));
             removeRefundProtectionFromSummary();
         }
-
     }
 
     private void setRefundEnabledSelected() {
@@ -306,7 +306,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private void removeRefundProtectionFromSummary() {
 
         removeItemFromList("Refund Protection");
-
     }
 
     public void removeItemFromList(String string){
@@ -356,16 +355,12 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             ll_card_conatiner.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             resetPaymentContainerToDefault();
         }
-
-
     }
 
     private void resetPaymentContainerToDefault() {
 
         tv_pay_amount.setVisibility(View.VISIBLE);
         pay_button_ll.setClickable(false);
-
-
     }
 
     private void commsPreferencesClicked() {
@@ -389,41 +384,75 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         removeItemFromList("Collect");
 
 
+
         if (deliveryObject.getTv_delivery_name().contains("RapidScan")){
 
-            RapidScan = true;
-            Posted = false;
-            Collect = false;
+            if(!RapidScan) {
+                RapidScan = true; Posted = false; Collect = false;
 
+                paymentObject.add(new PaymentObject("    ", "RapidScan", "£0.50"));
+                setSummaryAdapter(paymentObject);
 
-            paymentObject.add(new PaymentObject("    ", "RapidScan", "£0.50"));
-            setSummaryAdapter(paymentObject);
+            } else {
+
+                RapidScan = false; Posted = false; Collect = false;
+                re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
+                removeItemFromList("RapidScan");
+
+            }
 
         }else if (deliveryObject.getTv_delivery_name().contains("Posted")){
 
-            RapidScan = false;
-            Posted = true;
-            Collect = false;
+            if(!Posted){
+                RapidScan = false; Posted = true; Collect = false;
 
-            paymentObject.add(new PaymentObject("    ", "Posted", "£3.99"));
-            setSummaryAdapter(paymentObject);
+                paymentObject.add(new PaymentObject("    ", "Posted", "£3.99"));
+                setSummaryAdapter(paymentObject);
+
+            } else {
+                RapidScan = false; Posted = false; Collect = false;
+                re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
+                removeItemFromList("Posted");
+
+            }
+
 
         } else if (deliveryObject.getTv_delivery_name().contains("Collect")){
+            if(!Collect){
+                Collect = true; Posted = false; RapidScan = false;
 
-            Collect = true;
-            Posted = false;
-            RapidScan = false;
+                paymentObject.add(new PaymentObject("    ", "Collect", "£1.00"));
+                setSummaryAdapter(paymentObject);
 
+            } else {
+                RapidScan = false; Posted = false; Collect = false;
+                re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
+                removeItemFromList("Collect");
 
-            paymentObject.add(new PaymentObject("    ", "Collect", "£1.00"));
-            setSummaryAdapter(paymentObject);
+            }
 
         } else {
+
+            RapidScan = false;
+            Posted = false;
+            Collect = false;
+
+
+
             removeItemFromList("RapidScan");
             removeItemFromList("Posted");
             removeItemFromList("Collect");
         }
 
     }
+
+    private void setTotalPrice(){
+
+
+        tv_total_total.setText("" + totalPrice);
+        tv_pay_amount.setText("Total to pay " + totalPrice);
+
+
+        }
 
 }
