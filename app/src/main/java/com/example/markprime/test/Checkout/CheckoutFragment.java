@@ -1,6 +1,8 @@
 package com.example.markprime.test.Checkout;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.DeliveryObject;
@@ -217,6 +220,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         tv_comms_title.setOnClickListener(this);
 
         setTotalPrice();
+
     }
 
     private void setupButtons(View view){
@@ -246,7 +250,19 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             case R.id.ll_gpay_container: payByGPayClicked(); break;
             case R.id.ll_card_conatiner: payByCardClicked(); break;
             case R.id.tv_comms_title: commsPreferencesClicked(); break;
+            case R.id.tv_comms_detail: termsClicked(); break;
+            case R.id.tv_opt_out: privacyClicked(); break;
         }
+    }
+
+    private void privacyClicked() {
+        Intent privacy = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skiddle.com/terms/privacy.php"));
+        startActivity(privacy);
+    }
+
+    private void termsClicked() {
+        Intent terms = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skiddle.com/terms"));
+        startActivity(terms);
     }
 
     private void charityDonationClicked() {
@@ -280,11 +296,11 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         setSummaryAdapter(paymentObject);
         setTotalPrice();
 
+        Toast.makeText(context, "Thank you for donating to such a worthy cause.", Toast.LENGTH_SHORT).show();
+
     }
 
     public void removeCharityDonationFromSummary() {
-
-
         removeItemFromList("Charity Donation");
         getTotalAmount();
         setTotalPrice();
@@ -316,6 +332,8 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         getTotalAmount();
         setTotalPrice();
         setSummaryAdapter(paymentObject);
+
+        Toast.makeText(context, "You're covered should the worse happen.", Toast.LENGTH_SHORT).show();
     }
 
     private void removeRefundProtectionFromSummary() {
@@ -336,6 +354,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
 
     private void refundInfoClicked() {
+
+
+
     }
 
     private void payByGPayClicked() {
@@ -492,5 +513,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             totalPrice = totalPrice + totalTicketCost;
         }
         return totalPrice;
+    }
+
+    public void optOutClicked(OptOutObject optOutObject) {
+
     }
 }
