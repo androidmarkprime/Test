@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CheckoutFragment extends Fragment implements View.OnClickListener, DeliveryAdapterListener {
+public class CheckoutFragment extends Fragment implements View.OnClickListener, DeliveryAdapterListener, PaymentAdapterListener {
 
     private Context context;
     private FragmentInteractionListener fragmentInteractionListener;
@@ -50,6 +50,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private boolean payWithCard = false, payWithGoogle = false;
     private boolean RapidScan = false, Posted = false, Collect = false;
     private double totalPrice = 0.00;
+
 
     private List<PaymentObject> paymentObject = new ArrayList<>();
     private List<DeliveryObject> deliveryObject = new ArrayList<>();
@@ -82,11 +83,11 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
         List<DeliveryObject> deliveryObjects = deliveryObject;
         deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_rapid_scan),
-                "RapidScan", "Tickets in your mobile app.", "£0.50"));
+                "RapidScan", "Tickets in your mobile app.", "0.50"));
         deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_posted_tickets),
-                "Posted", "Tickets delivered to your door.", "£3.99"));
+                "Posted", "Tickets delivered to your door.", "3.99"));
         deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_collect_tickets),
-                "Collect", "Collect your tickets on arrival at the venue.", "£1.00"));
+                "Collect", "Collect your tickets on arrival at the venue.", "1.00"));
 
 
         List<OptOutObject> optOutObjects = new ArrayList<>();
@@ -97,7 +98,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
         List<PaymentObject> paymentObjects = paymentObject;
         paymentObjects.add(
-                new PaymentObject("2 x", "Standard Entry Tickets", "£50.00"));
+                new PaymentObject("2 x", "Standard Entry Tickets", "50.00"));
 
 
         setAdapters(deliveryObjects, optOutObjects, paymentObjects);
@@ -155,8 +156,12 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         optOutAdapter = new OptOutAdapter(context, optOutObjects);
         re_opt_out_choices.setAdapter(optOutAdapter);
 
-        paymentAdapter = new PaymentAdapter(context, paymentObjects);
+        paymentAdapter = new PaymentAdapter(context, paymentObjects, this);
         re_summary.setAdapter(paymentAdapter);
+
+        getTotalAmount();
+        paymentAdapter.notifyDataSetChanged();
+
     }
 
     private void setupLL(View view){
@@ -269,12 +274,20 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
 
     public void addCharityDonationToSummary() {
-        paymentObject.add(new PaymentObject("    ", "Charity Donation", "£1.00"));
+        paymentObject.add(new PaymentObject("    ", "Charity Donation", "1.00"));
+        paymentAdapter.notifyDataSetChanged();
+        getTotalAmount();
         setSummaryAdapter(paymentObject);
+        setTotalPrice();
+
     }
 
     public void removeCharityDonationFromSummary() {
+
+
         removeItemFromList("Charity Donation");
+        getTotalAmount();
+        setTotalPrice();
    }
 
 
@@ -299,13 +312,16 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
     private void addRefundProtectionToSummary() {
 
-        paymentObject.add(new PaymentObject("    ", "Refund Protection", "£1.00"));
+        paymentObject.add(new PaymentObject("    ", "Refund Protection", "1.00"));
+        getTotalAmount();
+        setTotalPrice();
         setSummaryAdapter(paymentObject);
     }
 
     private void removeRefundProtectionFromSummary() {
-
         removeItemFromList("Refund Protection");
+        getTotalAmount();
+        setTotalPrice();
     }
 
     public void removeItemFromList(String string){
@@ -315,8 +331,6 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
                 paymentAdapter.notifyDataSetChanged();
             }
         }
-//        listener.setTotalAmountText(getTotalAmount());
-//        listener.changeMadeToList(getTotalAmount());
     }
 
 
@@ -372,7 +386,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     }
 
     public void setSummaryAdapter(List<PaymentObject> paymentObjects){
-        paymentAdapter = new PaymentAdapter(context, paymentObjects);
+        paymentAdapter = new PaymentAdapter(context, paymentObjects, this);
         re_summary.setAdapter(paymentAdapter);
     }
 
@@ -390,7 +404,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             if(!RapidScan) {
                 RapidScan = true; Posted = false; Collect = false;
 
-                paymentObject.add(new PaymentObject("    ", "RapidScan", "£0.50"));
+                paymentObject.add(new PaymentObject("    ", "RapidScan", "0.50"));
+                getTotalAmount();
+                setTotalPrice();
                 setSummaryAdapter(paymentObject);
 
             } else {
@@ -398,6 +414,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
                 RapidScan = false; Posted = false; Collect = false;
                 re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
                 removeItemFromList("RapidScan");
+                getTotalAmount();
+                setTotalPrice();
+                setSummaryAdapter(paymentObject);
 
             }
 
@@ -406,13 +425,18 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             if(!Posted){
                 RapidScan = false; Posted = true; Collect = false;
 
-                paymentObject.add(new PaymentObject("    ", "Posted", "£3.99"));
+                paymentObject.add(new PaymentObject("    ", "Posted", "3.99"));
+                getTotalAmount();
+                setTotalPrice();
                 setSummaryAdapter(paymentObject);
 
             } else {
                 RapidScan = false; Posted = false; Collect = false;
                 re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
                 removeItemFromList("Posted");
+                getTotalAmount();
+                setTotalPrice();
+                setSummaryAdapter(paymentObject);
 
             }
 
@@ -421,13 +445,18 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
             if(!Collect){
                 Collect = true; Posted = false; RapidScan = false;
 
-                paymentObject.add(new PaymentObject("    ", "Collect", "£1.00"));
+                paymentObject.add(new PaymentObject("    ", "Collect", "1.00"));
+                getTotalAmount();
+                setTotalPrice();
                 setSummaryAdapter(paymentObject);
 
             } else {
                 RapidScan = false; Posted = false; Collect = false;
                 re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
                 removeItemFromList("Collect");
+                getTotalAmount();
+                setTotalPrice();
+                setSummaryAdapter(paymentObject);
 
             }
 
@@ -448,11 +477,20 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
     private void setTotalPrice(){
 
-
-        tv_total_total.setText("" + totalPrice);
-        tv_pay_amount.setText("Total to pay " + totalPrice);
+        tv_total_total.setText("£" + totalPrice);
+        tv_pay_amount.setText("Total to pay £" + totalPrice);
 
 
         }
 
+    public double getTotalAmount(){
+
+        totalPrice = 0.00;
+
+        for(int i = 0; i < paymentObject.size(); i++){
+            double totalTicketCost = (Double.parseDouble(paymentObject.get(i).getTv_ticket_subtotal()));
+            totalPrice = totalPrice + totalTicketCost;
+        }
+        return totalPrice;
+    }
 }

@@ -19,10 +19,11 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
     private List<PaymentObject> paymentObjects;
     private PaymentAdapterListener paymentAdapterListener;
 
-    public PaymentAdapter (Context context, List<PaymentObject> paymentObjects){
+    public PaymentAdapter (Context context, List<PaymentObject> paymentObjects, PaymentAdapterListener paymentAdapterListener){
 
         this.context = context;
         this.paymentObjects = paymentObjects;
+        this.paymentAdapterListener = paymentAdapterListener;
 
     }
 
@@ -64,23 +65,13 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentAdapter.ViewHold
             }
     }
 
-    public double getTotalAmount(){
-        double totalCost = 0;
-
-        for(int i = 0; i < paymentObjects.size(); i++){
-            double totalTicketCost = (Double.parseDouble(paymentObjects.get(i).getTv_ticket_subtotal()));
-                totalCost = totalCost + totalTicketCost;
-            }
-        return totalCost;
-        }
-//        if(totalCost > 0 && !charityDonationOrRefundProtectionAdded){
-//            for(int i = 0; i < paymentObjects.size(); i++){
-//                if(paymentObjects.get(i).ticketName.equalsIgnoreCase("RapidScan")){
-//                    totalCost = totalCost + paymentObjects.get(i).deliveryCostIfNoFree;
-//                }
+//    public double getTotalAmount(){
+//
+//        for(int i = 0; i < paymentObjects.size(); i++){
+//            double totalTicketCost = (Double.parseDouble(paymentObjects.get(i).getTv_ticket_subtotal()));
+//                paymentTotal = paymentTotal + totalTicketCost;
 //            }
+//        return paymentTotal;
 //        }
-//        totalAmount = totalCost;
-//        return totalCost;
     }
 
