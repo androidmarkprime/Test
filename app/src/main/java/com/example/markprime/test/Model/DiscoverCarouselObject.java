@@ -1,4 +1,4 @@
 package com.example.markprime.test.Model;
 
-public class DiscoverObject {
+public class DiscoverCarouselObject {
 }
