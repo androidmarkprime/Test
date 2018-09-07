@@ -63,7 +63,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<ViewHolder>{
             case TYPE_CAROUSEL:
 
                 return new CarouselViewHolder(inflater.inflate(
-                        R.layout.model_carousel_item, parent, false
+                        R.layout.model_discover_carousel_item, parent, false
                 ));
 
             case TYPE_INSPIRE_ME:

@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/ll_carousel_item"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp"
-    android:layout_marginTop="20dp">
+    android:layout_height="match_parent"
+    android:id="@+id/fl_carousel_item">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:id="@+id/ll_carousel_item_detail">
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:background="@drawable/background_rounded_grey"
+            android:id="@+id/iv_carousel_item_image"/>
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_carousel_title"
-            android:layout_weight="10"
-            android:text="Festivals"
-            android:layout_marginStart="20dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"/>
-
-        <Button
             android:layout_width="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_height="40dp"
-            android:id="@+id/btn_see_more"
-            android:background="@drawable/extras_turq_rounded"
-            android:text="See more"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="20dp"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15dp"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_carousel_event_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:text="VENUE"
+            android:textStyle="bold"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/carousel_event_date"
+            android:textSize="14dp"
+            android:layout_marginTop="5dp"
+            android:text="Date"
+            android:layout_marginStart="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/iv_carousel_location"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icn_small_location"
+                android:layout_marginStart="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/carousel_event_location"
+                android:text="location"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorAccent"
+                android:textSize="14dp"
+                android:layout_marginStart="5dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/re_carousel_items">
-    </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+</FrameLayout>
