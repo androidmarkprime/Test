@@ -1,5 +1,6 @@
 package com.example.markprime.test;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -73,4 +74,9 @@ public class MainActivity extends FragmentActivity implements FragmentInteractio
         fragmentTransaction.replace(fl_fragment_container.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+
+
+
+
 }

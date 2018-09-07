@@ -17,9 +17,15 @@
     <string name="payment">4. Select your payment method</string>
     <string name="extras">2. Anything else?</string>
     <string name="summary">3. Summary</string>
-    <string name="communications">Let\'s stay in touch, click here to adjust your communication preferences</string>
-    <string name="opt_out">We know true fans love being in the know, so Skiddle would like to send you information about relevant events, according to our <u>Privacy Policy</u>. You can opt out below, from your user profile or any emails we send out.</string>
-    <string name="terms">By completing your order you accept the <u>Terms &amp; Conditions</u> of using Skiddle as well as the terms and conditions set by the promoter. Refunds can only be offered if the event is cancelled or postponed.</string>
+    <string name="communications">Let\'s stay in touch, click here to adjust your
+        communication preferences</string>
+    <string name="opt_out">We know true fans love being in the know, so Skiddle
+        would like to send you information about relevant events, according to our
+        <u>Privacy Policy</u>. You can opt out below, from your user profile or any
+        emails we send out.</string>
+    <string name="terms">By completing your order you accept the <u>Terms &amp; Conditions</u>
+        of using Skiddle as well as the terms and conditions set by the promoter. Refunds
+        can only be offered if the event is cancelled or postponed.</string>
     <string name="gpay">Google Pay</string>
     <string name="card">Credit / Debit Card</string>
     <string name="charity">Add a Charity Donation</string>
@@ -27,6 +33,13 @@
     <string name="pay_amount">Total to pay £ </string>
     <string name="card_number">1234 1234 1234 1234 </string>
     <string name="card_date">MM/YY</string>
+
+    <!--Pop up strings-->
+    <string name="charity_title">Skiddle support Macmillan Cancer Support</string>
+    <string name="charity_info">There’s a terrifying fact that 1 in 2 people will get Cancer.
+        That’s 50%. Or half. People you know, people you love or people you care about.
+        You’ve more chance of getting cancer than winning on a national lottery scratch card.
+        Simply terrifying.</string>
 
 
 </resources>

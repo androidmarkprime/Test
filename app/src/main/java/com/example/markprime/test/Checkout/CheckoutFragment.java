@@ -29,14 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CheckoutFragment extends Fragment implements View.OnClickListener, DeliveryAdapterListener, PaymentAdapterListener {
+public class CheckoutFragment extends Fragment implements View.OnClickListener, DeliveryAdapterListener, PaymentAdapterListener, OptOutAdapterListener {
 
     private Context context;
     private FragmentInteractionListener fragmentInteractionListener;
     private LinearLayout checkout_ll, ll_extras_container,
             ll_card_conatiner, ll_payment_container, ll_gpay_container, ll_extras_1_container,
             ll_extras_2_container, pay_button_ll, ll_cd_container, ll_rp_container,
-            ll_card_input_conatiner, ll_comms_preferences,ll_delivery_options;
+            ll_card_input_conatiner, ll_comms_preferences,ll_delivery_options, ll_optOut;
     private RecyclerView re_delivery, re_summary, re_opt_out_choices;
     private ImageView iv_gpay_icon, iv_card_icon;
     private TextView tv_delivery_info, tv_payment_info, tv_gpay_text, tv_card_text, tv_extras_text,
@@ -52,6 +52,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private boolean refundProtectionEnabled = false, charityDonationEnabled = false;
     private boolean payWithCard = false, payWithGoogle = false;
     private boolean RapidScan = false, Posted = false, Collect = false;
+    private boolean personalised = false, targetted = false;
     private double totalPrice = 0.00;
 
 
@@ -156,7 +157,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         deliveryAdapter = new DeliveryAdapter(context, deliveryObjects, this);
         re_delivery.setAdapter(deliveryAdapter);
 
-        optOutAdapter = new OptOutAdapter(context, optOutObjects);
+        optOutAdapter = new OptOutAdapter(context, optOutObjects, this);
         re_opt_out_choices.setAdapter(optOutAdapter);
 
         paymentAdapter = new PaymentAdapter(context, paymentObjects, this);
@@ -180,6 +181,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         ll_rp_container = view.findViewById(R.id.ll_rp_container);
         ll_card_input_conatiner = view.findViewById(R.id.ll_card_input_conatiner);
         ll_comms_preferences = view.findViewById(R.id.ll_comms_preferences);
+        ll_optOut = view.findViewById(R.id.ll_optOut);
 
 
         ll_cd_container.setOnClickListener(this);
@@ -245,7 +247,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         switch(view.getId()){
             case R.id.cb_extras_1: charityDonationClicked(); break;
             case R.id.cb_extras_2: refundProtectionClicked(); break;
-            case R.id.btn_extras_1_info: charityInfoClicked(); break;
+//            case R.id.btn_extras_1_info: charityInfoClicked(); break;
             case R.id.btn_extras_2_info: refundInfoClicked(); break;
             case R.id.ll_gpay_container: payByGPayClicked(); break;
             case R.id.ll_card_conatiner: payByCardClicked(); break;
@@ -286,6 +288,7 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
 
     private void charityInfoClicked() {
+
     }
 
 
@@ -423,77 +426,66 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         if (deliveryObject.getTv_delivery_name().contains("RapidScan")){
 
             if(!RapidScan) {
-                RapidScan = true; Posted = false; Collect = false;
+                RapidScan = true;
 
                 paymentObject.add(new PaymentObject("    ", "RapidScan", "0.50"));
-                getTotalAmount();
-                setTotalPrice();
-                setSummaryAdapter(paymentObject);
+                updatePaymentdetails();
 
             } else {
 
-                RapidScan = false; Posted = false; Collect = false;
+                RapidScan = false;
                 re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
                 removeItemFromList("RapidScan");
-                getTotalAmount();
-                setTotalPrice();
-                setSummaryAdapter(paymentObject);
+                updatePaymentdetails();
 
             }
 
         }else if (deliveryObject.getTv_delivery_name().contains("Posted")){
 
             if(!Posted){
-                RapidScan = false; Posted = true; Collect = false;
+                Posted = true;
 
                 paymentObject.add(new PaymentObject("    ", "Posted", "3.99"));
-                getTotalAmount();
-                setTotalPrice();
-                setSummaryAdapter(paymentObject);
+                updatePaymentdetails();
 
             } else {
-                RapidScan = false; Posted = false; Collect = false;
+                Posted = false;
                 re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
                 removeItemFromList("Posted");
-                getTotalAmount();
-                setTotalPrice();
-                setSummaryAdapter(paymentObject);
+                updatePaymentdetails();
 
             }
 
 
         } else if (deliveryObject.getTv_delivery_name().contains("Collect")){
             if(!Collect){
-                Collect = true; Posted = false; RapidScan = false;
+                Collect = true;
 
                 paymentObject.add(new PaymentObject("    ", "Collect", "1.00"));
-                getTotalAmount();
-                setTotalPrice();
-                setSummaryAdapter(paymentObject);
+                updatePaymentdetails();
 
             } else {
-                RapidScan = false; Posted = false; Collect = false;
+                Collect = false;
                 re_delivery.findViewById(R.id.ll_delivery_options).setBackground(context.getResources().getDrawable(R.drawable.ticket_deliver_white));
                 removeItemFromList("Collect");
-                getTotalAmount();
-                setTotalPrice();
-                setSummaryAdapter(paymentObject);
+                updatePaymentdetails();
 
             }
 
         } else {
 
-            RapidScan = false;
-            Posted = false;
-            Collect = false;
+            RapidScan = false; Posted = false; Collect = false;
 
-
-
-            removeItemFromList("RapidScan");
-            removeItemFromList("Posted");
-            removeItemFromList("Collect");
+            removeItemFromList("RapidScan"); removeItemFromList("Posted"); removeItemFromList("Collect");
+            updatePaymentdetails();
         }
 
+    }
+
+    private void updatePaymentdetails() {
+        getTotalAmount();
+        setTotalPrice();
+        setSummaryAdapter(paymentObject);
     }
 
     private void setTotalPrice(){
@@ -516,6 +508,36 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     }
 
     public void optOutClicked(OptOutObject optOutObject) {
+
+        if(optOutObject.getTv_opt_out().contains("personalised")){
+
+            if(!personalised){
+                personalised = true;
+
+                Toast.makeText(context, "You will no longer receive personalised communications from us",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                personalised = false;
+
+            }
+        } else if (optOutObject.getTv_opt_out().contains("targetted")) {
+
+            if(!targetted){
+                targetted = true;
+
+                Toast.makeText(context, "You will no longer receive targetted communications from us",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                targetted = false;
+
+
+            }
+
+        } else {
+
+            personalised = false; targetted = false;
+
+        }
 
     }
 }
