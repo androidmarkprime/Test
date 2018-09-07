@@ -41,5 +41,8 @@
         You’ve more chance of getting cancer than winning on a national lottery scratch card.
         Simply terrifying.</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
