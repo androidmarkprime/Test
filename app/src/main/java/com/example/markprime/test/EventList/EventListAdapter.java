@@ -1,6 +1,7 @@
 package com.example.markprime.test.EventList;
 
 import android.content.Context;
+import android.graphics.drawable.RippleDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
 import com.squareup.picasso.Picasso;
@@ -55,9 +57,11 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         holder.event_venue_name.setText(eventObjects.get(position).getVenueName());
         holder.event_venue_town.setText(eventObjects.get(position).getVenueTown());
 
+
         holder.ll_parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 eventListAdapterListener.eventClicked(eventObjects.get(holder.getAdapterPosition()));
             }
         });
@@ -76,6 +80,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         private TextView event_date;
         private TextView event_venue_name;
         private TextView event_venue_town;
+        private RippleView event_ripple;
 
         private LinearLayout ll_parent;
 

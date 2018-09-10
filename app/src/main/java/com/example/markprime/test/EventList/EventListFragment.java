@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
@@ -131,6 +132,7 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
     public void eventClicked(EventObject eventObject) {
         fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
     }
+
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
