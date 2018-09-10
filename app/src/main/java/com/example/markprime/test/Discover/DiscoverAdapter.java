@@ -33,7 +33,7 @@
 //    private final int TYPE_EVENT = 2;
 //
 //    private final String CAROUSEL = "carousel";
-//    private final String INSPIRE_ME = "singleinspireme";
+//    private final String INSPIRE_ME = "inspireme";
 //    private final String EVENT = "event";
 //
 //    private List<DiscoverObject> discoverObjectList;

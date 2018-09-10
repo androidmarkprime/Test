@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.ArtistObject;
 import com.example.markprime.test.Model.EventObject;
@@ -54,6 +55,7 @@ public class EventDetailsFragment extends Fragment {
     private List<GenreObject> genreList = new ArrayList<>();
     private ArtistListAdapter artistListAdapter;
     private GenreListAdapter genreListAdapter;
+    private RippleView buy_ripple;
 
     private static final String EVENT_OBJECT = "event_object";
     private EventObject eventObject;

@@ -9,5 +9,6 @@
     <color name="Grey_LT">#efefef</color>
     <color name="Blue">#add8e6</color>
     <color name="Turq">#40e0d0</color>
+    <color name="Turq_darker">#33adb6</color>
     
 </resources>
