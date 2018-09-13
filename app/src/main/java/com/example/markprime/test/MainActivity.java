@@ -28,7 +28,7 @@ public class MainActivity extends FragmentActivity implements FragmentInteractio
 
         setUpFrameLayout();
         setupFragmentManager();
-        setInitialFragment();
+        setEventListFragment();
 
 
     }
@@ -43,8 +43,7 @@ public class MainActivity extends FragmentActivity implements FragmentInteractio
         fragmentManager = getSupportFragmentManager();
     }
 
-
-    private void setInitialFragment(){
+    private void setEventListFragment(){
         fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(fl_fragment_container.getId(), EventListFragment.newInstance()).addToBackStack(null);
         fragmentTransaction.commit();

@@ -1,9 +1,7 @@
-package com.example.markprime.test.EventList;
+package com.example.markprime.test.Home.Fragment1;
 
 import android.content.Context;
-import android.graphics.drawable.RippleDrawable;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.andexert.library.RippleView;
+
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
 import com.squareup.picasso.Picasso;
@@ -23,28 +21,29 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.ViewHolder>{
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
     private Context context;
     private List<EventObject> eventObjects;
-    private EventListAdapterListener eventListAdapterListener;
+//    private EventsAdapterListener eventsAdapterListener;
 
-    public EventListAdapter (Context context, List<EventObject> eventObjects, EventListAdapterListener eventListAdapterListener){
+    public EventsAdapter (Context context, List<EventObject> eventObjects) {
         this.context = context;
         this.eventObjects = eventObjects;
-        this.eventListAdapterListener = eventListAdapterListener;
+//        this.eventsAdapterListener =eventsAdapterListener;
     }
 
     @NonNull
     @Override
-    public EventListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EventsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.model_event_list, parent, false);
-        return new ViewHolder(view);
+        return new EventsAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final EventListAdapter.ViewHolder holder, int position) {
-        Picasso .get()
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+
+        Picasso.get()
                 .load(eventObjects.get(position).getImageUrl())
                 .noFade()
                 .into(holder.event_image);
@@ -57,16 +56,16 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         holder.event_venue_name.setText(eventObjects.get(position).getVenueName());
         holder.event_venue_town.setText(eventObjects.get(position).getVenueTown());
 
-
-        holder.ll_parent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                eventListAdapterListener.eventClicked(eventObjects.get(holder.getAdapterPosition()));
-            }
-        });
+//        holder.ll_parent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                eventsAdapterListener.eventClicked(eventObjects.get(holder.getAdapterPosition()));
+//            }
+//        });
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -103,6 +102,5 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         format = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.UK);
         return format.format(newDate);
     }
-
 
 }

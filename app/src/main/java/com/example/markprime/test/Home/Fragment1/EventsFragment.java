@@ -1,5 +1,4 @@
-package com.example.markprime.test.EventList;
-
+package com.example.markprime.test.Home.Fragment1;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,10 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.andexert.library.RippleView;
+import com.example.markprime.test.EventList.EventListFragment;
 import com.example.markprime.test.FragmentInteractionListener;
+import com.example.markprime.test.Home.HomeFragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
 import com.example.markprime.test.Network.VolleySingletonErrorListener;
@@ -33,21 +32,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class EventListFragment extends Fragment implements EventListAdapterListener {
+public class EventsFragment extends Fragment implements EventsAdapterListener {
 
-    private RecyclerView re_event_list;
+    private RecyclerView re_events;
     private Context context;
-    private FragmentInteractionListener fragmentInteractionListener;
     private List<EventObject> eventList = new ArrayList<>();
-    private EventListAdapter eventListAdapter;
+    private EventsAdapter eventsAdapter;
+    private EventsAdapterListener eventsAdapterListener;
+    private HomeFragmentInteractionListener homeFragmentInteractionListener;
 
 
-    public EventListFragment() {
-        //required empty public constructor
-    }
 
-    public static EventListFragment newInstance() {
-        EventListFragment fragment = new EventListFragment();
+    public EventsFragment(){}
+
+    public static EventsFragment newInstance(int i) {
+        EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -62,7 +61,7 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_event_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         setUpRecyclerView(view);
 
@@ -77,10 +76,10 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
     }
 
     private void setUpRecyclerView(View view) {
-        re_event_list = view.findViewById(R.id.re_event_list);
+        re_events = view.findViewById(R.id.re_events);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        re_event_list.setLayoutManager(linearLayoutManager);
+        re_events.setLayoutManager(linearLayoutManager);
     }
 
     private void getEvents() {
@@ -115,7 +114,7 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-        fragmentInteractionListener = (FragmentInteractionListener) context;
+//        homeFragmentInteractionListener = (HomeFragmentInteractionListener) context;
     }
 
     @Override
@@ -124,15 +123,9 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
     }
 
     private void setAdapter() {
-        eventListAdapter = new EventListAdapter(context, eventList, this);
+        eventsAdapter = new EventsAdapter(context, eventList);
 //        Collections.shuffle(eventList);
-        re_event_list.setAdapter(eventListAdapter);
-    }
-
-
-    @Override
-    public void eventClicked(EventObject eventObject) {
-        fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
+        re_events.setAdapter(eventsAdapter);
     }
 
 
@@ -142,17 +135,21 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
             final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             final NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
             if (ni != null && ni.isConnectedOrConnecting()) {
-                if (re_event_list.getAdapter() == null) {
+                if (re_events.getAdapter() == null) {
                     getEvents()
 
                     ;}else
 
-                return;
-                }
+                    return;
             }
+        }
 
 
 
     };
 
+    @Override
+    public void eventClicked(EventObject eventObject) {
+
+    }
 }

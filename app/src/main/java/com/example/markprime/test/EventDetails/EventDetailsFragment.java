@@ -48,18 +48,13 @@ public class EventDetailsFragment extends Fragment {
     private ImageView event_details_image, share_messenger, share_whatsApp, share_fb, artist_spotify, share_general, share_twitter;
     private TextView event_name, event_min_age, doors_last_entry_info_1, event_date, event_description, doors_open_info, doors_open, doors_close_info, doors_close, doors_last_entry_info, last_entry, venue_name, venue_add, venue_town, venue_pc, venue_phone, artist_info, genre_info;
     private RecyclerView re_artist_details, re_genre_details;
-    private Button buy_tickets_button;
-    private LinearLayoutManager linearLayoutManager;
-    private LinearLayoutManager linearLayoutManager1;
     private List<ArtistObject> artistList = new ArrayList<>();
     private List<GenreObject> genreList = new ArrayList<>();
     private ArtistListAdapter artistListAdapter;
     private GenreListAdapter genreListAdapter;
-    private RippleView buy_ripple;
 
     private static final String EVENT_OBJECT = "event_object";
     private EventObject eventObject;
-    private ArtistObject artistObject;
 
 
     public EventDetailsFragment() {
