@@ -1,6 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_menu"
+    android:layout_width="200dp"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/colorPrimary">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:scaleType="centerCrop"
+            android:background="@color/Turq"
+            android:id="@+id/img_background_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:id="@+id/ll_profile_contaner">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/iv_profile"
+                    android:src="@drawable/ic_default_avatar"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/tv_profile_name"
+                    android:gravity="center"
+                    android:hint="USER NAME"
+                    android:textColorHint="@color/Grey_LT"
+                    android:textColor="@color/colorPrimary"
+                    android:textAllCaps="false"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:id="@+id/menu_my_tickets_container"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/menu_iv_my_tickets"
+                android:src="@drawable/ic_ticket_black"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:id="@+id/menu_tv_my_tickets"
+                android:text="My Tickets"
+                android:layout_weight="6"/>
+
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:id="@+id/menu_events_container"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/menu_iv_events"
+                android:src="@drawable/ic_events_calendar"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Events"
+                android:id="@+id/menu_tv_events"
+                android:layout_weight="6"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:id="@+id/menu_artists_container"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:id="@+id/menu_iv_artists"
+                android:src="@drawable/ic_artists_musical_note"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="Artists"
+                android:id="@+id/menu_tv_artists"
+                android:layout_weight="6"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_ticket_black"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="My Tickets"
+                android:layout_weight="6"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_ticket_black"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:text="My Tickets"
+                android:layout_weight="6"/>
+
+
+
+        </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
