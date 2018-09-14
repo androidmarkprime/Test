@@ -1,4 +1,4 @@
-package com.example.markprime.test.Home.Fragment1;
+package com.example.markprime.test.Home.Events;
 
 import com.example.markprime.test.Model.EventObject;
 

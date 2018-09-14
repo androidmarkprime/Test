@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.markprime.test.Home.Fragment1.EventsFragment;
-import com.example.markprime.test.Home.Fragment2.TwoFragment;
-import com.example.markprime.test.Home.Fragment3.ThreeFragment;
+import com.example.markprime.test.Home.Events.EventsFragment;
+import com.example.markprime.test.Home.MyTickets.MyTicketsFragment;
+import com.example.markprime.test.Home.SavedEvents.SavedEventsFragment;
 
 public class HomeActivityPagerAdapter {
 
@@ -22,11 +22,11 @@ public class HomeActivityPagerAdapter {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: // Fragment # 0 - This will show FirstFragment
-                    return EventsFragment.newInstance(0);
+                    return EventsFragment.newInstance(0, "Events");
                 case 1: // Fragment # 0 - This will show FirstFragment different title
-                    return TwoFragment.newInstance(1);
+                    return MyTicketsFragment.newInstance(1, "Two");
                 case 2: // Fragment # 1 - This will show SecondFragment
-                    return ThreeFragment.newInstance(2);
+                    return SavedEventsFragment.newInstance(2, "Three");
                 default:
                     return null;
             }

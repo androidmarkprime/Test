@@ -1,4 +1,4 @@
-package com.example.markprime.test.Home.Fragment3;
+package com.example.markprime.test.Home.SavedEvents;
 
 
 import android.os.Bundle;
@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.markprime.test.Home.Fragment2.TwoFragment;
 import com.example.markprime.test.R;
 
-public class ThreeFragment extends Fragment {
+public class SavedEventsFragment extends Fragment {
 
-    public ThreeFragment() {
+    public SavedEventsFragment() {
         // Required empty public constructor
     }
 
@@ -27,9 +26,9 @@ public class ThreeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_three, container, false);
     }
 
-    public static ThreeFragment newInstance(int i) {
+    public static SavedEventsFragment newInstance(int i, String title) {
 
-        ThreeFragment fragmentThree = new ThreeFragment();
+        SavedEventsFragment fragmentThree = new SavedEventsFragment();
         Bundle args = new Bundle();
         fragmentThree.setArguments(args);
         return fragmentThree;

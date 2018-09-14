@@ -1,4 +1,4 @@
-package com.example.markprime.test.Home.Fragment1;
+package com.example.markprime.test.Home.Events;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,8 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.markprime.test.EventList.EventListFragment;
-import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Home.HomeFragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
@@ -29,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class EventsFragment extends Fragment implements EventsAdapterListener {
@@ -45,7 +42,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
 
     public EventsFragment(){}
 
-    public static EventsFragment newInstance(int i) {
+    public static EventsFragment newInstance(int i, String title ) {
         EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);

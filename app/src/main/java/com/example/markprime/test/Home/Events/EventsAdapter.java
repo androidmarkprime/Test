@@ -1,4 +1,4 @@
-package com.example.markprime.test.Home.Fragment1;
+package com.example.markprime.test.Home.Events;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

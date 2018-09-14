@@ -106,3 +106,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
 
 
 }
+
+
+
