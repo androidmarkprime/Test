@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Home.HomeFragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
@@ -35,14 +36,13 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     private Context context;
     private List<EventObject> eventList = new ArrayList<>();
     private EventsAdapter eventsAdapter;
-    private EventsAdapterListener eventsAdapterListener;
-    private HomeFragmentInteractionListener homeFragmentInteractionListener;
+    private FragmentInteractionListener fragmentInteractionListener;
 
 
 
     public EventsFragment(){}
 
-    public static EventsFragment newInstance(int i, String title ) {
+    public static EventsFragment newInstance(int i) {
         EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -111,7 +111,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-//        homeFragmentInteractionListener = (HomeFragmentInteractionListener) context;
+        fragmentInteractionListener = (FragmentInteractionListener) context;
     }
 
     @Override
@@ -120,11 +120,17 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     }
 
     private void setAdapter() {
-        eventsAdapter = new EventsAdapter(context, eventList);
+        eventsAdapter = new EventsAdapter(context, eventList, eventsAdapterListener);
 //        Collections.shuffle(eventList);
         re_events.setAdapter(eventsAdapter);
     }
 
+    private EventsAdapterListener eventsAdapterListener = new EventsAdapterListener() {
+        @Override
+        public void eventClicked(EventObject eventObject) {
+            fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
+        }
+    };
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override

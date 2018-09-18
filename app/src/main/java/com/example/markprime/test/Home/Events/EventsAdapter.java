@@ -25,12 +25,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
 
     private Context context;
     private List<EventObject> eventObjects;
-//    private EventsAdapterListener eventsAdapterListener;
+    private EventsAdapterListener eventsAdapterListener;
 
-    public EventsAdapter (Context context, List<EventObject> eventObjects) {
+    public EventsAdapter (Context context, List<EventObject> eventObjects, EventsAdapterListener eventsAdapterListener) {
         this.context = context;
         this.eventObjects = eventObjects;
-//        this.eventsAdapterListener =eventsAdapterListener;
+        this.eventsAdapterListener = eventsAdapterListener;
     }
 
     @NonNull
@@ -56,13 +56,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.event_venue_name.setText(eventObjects.get(position).getVenueName());
         holder.event_venue_town.setText(eventObjects.get(position).getVenueTown());
 
-//        holder.ll_parent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                eventsAdapterListener.eventClicked(eventObjects.get(holder.getAdapterPosition()));
-//            }
-//        });
+        holder.ll_parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                eventsAdapterListener.eventClicked(eventObjects.get(holder.getAdapterPosition()));
+            }
+        });
 
     }
 

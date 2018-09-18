@@ -51,7 +51,8 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:id="@+id/re_my_tickets">
 
         </android.support.v7.widget.RecyclerView>
 

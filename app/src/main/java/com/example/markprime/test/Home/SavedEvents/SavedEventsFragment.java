@@ -23,10 +23,10 @@ public class SavedEventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_three, container, false);
+        return inflater.inflate(R.layout.fragment_saved_events, container, false);
     }
 
-    public static SavedEventsFragment newInstance(int i, String title) {
+    public static SavedEventsFragment newInstance(int i) {
 
         SavedEventsFragment fragmentThree = new SavedEventsFragment();
         Bundle args = new Bundle();

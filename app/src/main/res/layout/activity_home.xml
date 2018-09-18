@@ -48,6 +48,8 @@
 
                 </RelativeLayout>
 
+
+
                 <LinearLayout
                     android:id="@+id/ll_search_bar_container"
                     android:layout_width="match_parent"
@@ -71,22 +73,30 @@
                         android:src="@drawable/ic_search"
                         android:tint="@color/colorPrimary"/>
 
-                    <EditText
-                        android:id="@+id/et_search_field"
-                        android:layout_width="0dp"
+                    <com.andexert.library.RippleView
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:imeOptions="actionSearch"
-                        android:inputType="textVisiblePassword"
-                        android:padding="5dp"
-                        android:focusable="true"
-                        android:layout_marginStart="4dp"
-                        android:cursorVisible="false"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPrimary"
-                        android:hint="Search for events, venues..."
-                        android:textColorHint="@color/Grey_LT"/>
+                        app:rv_color="@color/Turq">
+
+                        <EditText
+                            android:id="@+id/et_search_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            android:imeOptions="actionSearch"
+                            android:inputType="textVisiblePassword"
+                            android:padding="5dp"
+                            android:focusable="true"
+                            android:layout_marginStart="4dp"
+                            android:cursorVisible="false"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimary"
+                            android:hint="Search for events, venues..."
+                            android:textColorHint="@color/Grey_LT"/>
+
+                    </com.andexert.library.RippleView>
+
 
                 </LinearLayout>
 
@@ -98,6 +108,13 @@
                 android:id="@+id/iv_home_divider"
                 android:src="@drawable/item_divider_grey"
                 />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:id="@+id/fl_vp__home">
+            </FrameLayout>
 
 
 
@@ -116,12 +133,7 @@
                         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
                         app:tabSelectedTextColor="@color/Turq" />
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/fl_vp__home">
 
-                    </FrameLayout>
 
             </android.support.v4.view.ViewPager>
 

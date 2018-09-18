@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.example.markprime.test.Home.Events.EventsAdapter;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
@@ -27,7 +30,7 @@ public class MyTicketsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MyTicketsFragment newInstance(int i, String title) {
+    public static MyTicketsFragment newInstance(int i) {
         MyTicketsFragment fragmentTwo = new MyTicketsFragment();
         Bundle args = new Bundle();
         fragmentTwo.setArguments(args);
@@ -45,7 +48,7 @@ public class MyTicketsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_two, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_tickets, container, false);
 
         return view;
     }
