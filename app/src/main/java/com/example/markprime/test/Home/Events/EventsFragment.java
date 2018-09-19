@@ -130,7 +130,6 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
         public void eventClicked(EventObject eventObject) {
             fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
             Intent intent = new Intent(getActivity(), PurchaseActivity.class);
-            intent.putExtra("EVENT_OBJECT", String.valueOf(eventObject.getFullObject()));
             startActivity(intent);
         }
     };

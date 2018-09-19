@@ -375,16 +375,16 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
     @Override
     public void openEventDetailsFragment(JSONObject eventDetails) {
-//        fl_vp__home.setVisibility(View.VISIBLE);
-//        transaction = fm.beginTransaction();
-//        transaction.replace(fl_vp__home.getId(), EventDetailsFragment.newInstance(eventDetails)).addToBackStack(null);
-//        transaction.commit();
+        fl_vp__home.setVisibility(View.VISIBLE);
+        transaction = fm.beginTransaction();
+        transaction.replace(fl_vp__home.getId(), EventDetailsFragment.newInstance(eventDetails)).addToBackStack(null);
+        transaction.commit();
     }
 
     public void openCheckOutFragment(View view) {
-//        transaction = fm.beginTransaction();
-//        transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
-//        transaction.commit();
+        transaction = fm.beginTransaction();
+        transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
+        transaction.commit();
     }
 
 

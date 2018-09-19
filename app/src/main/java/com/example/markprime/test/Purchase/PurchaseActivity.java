@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -32,18 +33,13 @@ public class PurchaseActivity extends FragmentActivity implements FragmentIntera
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase);
 
-        Intent intent = new Intent();
-        Bundle args = new Bundle();
-        args.putString(EVENT_OBJECT, eventDetails.toString());
-        intent.set
-
 
         setupFrameLayout();
         setupFrameManager();
 
     }
 
-    private void setEventDetails(JSONObject eventDetails) {
+    public void setEventDetails(JSONObject eventDetails) {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(fl_purchase.getId(), EventDetailsFragment.newInstance(eventDetails)).addToBackStack(null);
         fragmentTransaction.commit();
