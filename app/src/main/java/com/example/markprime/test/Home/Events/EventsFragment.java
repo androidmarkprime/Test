@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
@@ -77,6 +79,24 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         re_events.setLayoutManager(linearLayoutManager);
+
+        setAdapter();
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                eventsAdapter.notifyDataSetChanged();
+                Toast.makeText(context, "Event has been added to your Saved Events List", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(re_events);
     }
 
     private void getEvents() {
@@ -157,4 +177,6 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     public void eventClicked(EventObject eventObject) {
 
     }
+
+
 }
