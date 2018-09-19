@@ -2,8 +2,10 @@ package com.example.markprime.test.Home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -30,6 +32,7 @@ import com.example.markprime.test.Home.Events.EventsFragment;
 import com.example.markprime.test.Home.MyTickets.MyTicketsFragment;
 import com.example.markprime.test.Home.SavedEvents.SavedEventsFragment;
 import com.example.markprime.test.Model.EventObject;
+import com.example.markprime.test.Purchase.PurchaseActivity;
 import com.example.markprime.test.R;
 
 import org.json.JSONObject;
@@ -37,8 +40,10 @@ import org.json.JSONObject;
 public class HomeActivity extends AppCompatActivity implements FragmentInteractionListener {
 
 
-    private LinearLayout ll_menu, ll_home_main, ll_profile_contaner, menu_my_tickets_container, menu_reps_container,
-            menu_events_container, menu_artists_container, menu_brands_container, menu_setting_container,
+    private LinearLayout ll_menu, ll_home_main, ll_profile_contaner, ll_loader,
+            menu_my_tickets_container, menu_reps_container,
+            menu_events_container, menu_artists_container,
+            menu_brands_container, menu_setting_container,
             menu_help_container;
     private DrawerLayout dl_home;
     private TabLayout tablayout_home;
@@ -47,6 +52,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
     private Button btn_menu;
 
     private boolean drawerOpen = false;
+    private Boolean loaderVisible = false;
 
     private Context context;
 
@@ -64,8 +70,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager(), HomeActivity.this);
         vpPager.setAdapter(adapterViewPager);
 
-
-
+        setupLoader();
 
         setupFM();
         setupViews();
@@ -75,8 +80,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
         TabLayout tabLayout = findViewById(R.id.tablayout_home);
         tablayout_home.setupWithViewPager(vpPager);
-
-
 
     }
 
@@ -135,6 +138,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             return tabTitles[position];
         }
 
+    }
+
+    private void setupLoader(){
+        ll_loader = findViewById(R.id.ll_loader);
     }
 
 
@@ -304,6 +311,45 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         transaction = fm.beginTransaction();
     }
 
+
+    public void showLoader() {
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+
+                ll_loader.setVisibility(View.VISIBLE);
+                loaderVisible = true;
+                ll_loader.setClickable(true);
+                ll_loader.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Do nothing
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    public boolean isLoaderVisible() {
+        return ll_loader.getVisibility() == View.VISIBLE;
+    }
+
+    public void dismissLoader() {
+        if (loaderVisible == true) {
+            loaderVisible = false;
+        }
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                ll_loader.setVisibility(View.GONE);
+                ll_loader.setOnClickListener(null);
+            }
+        });
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //FragmentInteractionListener
 
@@ -313,30 +359,32 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         transaction.commit();
     }
 
-
-
-    @Override
-    public void openEventDetailsFragment(JSONObject eventDetails) {
-        fl_vp__home.setVisibility(View.VISIBLE);
-        transaction = fm.beginTransaction();
-        transaction.replace(fl_vp__home.getId(), EventDetailsFragment.newInstance(eventDetails)).addToBackStack(null);
-        transaction.commit();
-    }
-
-    public void openCheckOutFragment(View view) {
-        transaction = fm.beginTransaction();
-        transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
-        transaction.commit();
-    }
-
     @Override
     public void onBackPressed() {
         if(fm.getBackStackEntryCount() > 1){
-           fm.popBackStack();
-
+            fm.popBackStack();
         } else {
+            if(loaderVisible){
+                dismissLoader();
+            }else{
+                super.onBackPressed();
+            }
             finish();
         }
+    }
+
+    @Override
+    public void openEventDetailsFragment(JSONObject eventDetails) {
+//        fl_vp__home.setVisibility(View.VISIBLE);
+//        transaction = fm.beginTransaction();
+//        transaction.replace(fl_vp__home.getId(), EventDetailsFragment.newInstance(eventDetails)).addToBackStack(null);
+//        transaction.commit();
+    }
+
+    public void openCheckOutFragment(View view) {
+//        transaction = fm.beginTransaction();
+//        transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
+//        transaction.commit();
     }
 
 

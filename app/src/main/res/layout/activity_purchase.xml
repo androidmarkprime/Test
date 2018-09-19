@@ -5,16 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:id="@+id/ll_purchase"
+    tools:context=".Purchase.PurchaseActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fl_fragment_container">
+        android:id="@+id/fl_purchase">
 
     </FrameLayout>
-
-
-
 
 </LinearLayout>

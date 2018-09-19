@@ -20,6 +20,7 @@ import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
 import com.example.markprime.test.Network.VolleySingletonErrorListener;
 import com.example.markprime.test.Network.VolleySingletonListener;
+import com.example.markprime.test.Purchase.PurchaseActivity;
 import com.example.markprime.test.R;
 
 import org.json.JSONArray;
@@ -128,6 +129,9 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
         @Override
         public void eventClicked(EventObject eventObject) {
             fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
+            Intent intent = new Intent(getActivity(), PurchaseActivity.class);
+            intent.putExtra("EVENT_OBJECT", String.valueOf(eventObject.getFullObject()));
+            startActivity(intent);
         }
     };
 
