@@ -22,7 +22,6 @@ import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
 import com.example.markprime.test.Network.VolleySingletonErrorListener;
 import com.example.markprime.test.Network.VolleySingletonListener;
-import com.example.markprime.test.Purchase.PurchaseActivity;
 import com.example.markprime.test.R;
 
 import org.json.JSONArray;
@@ -39,6 +38,8 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     private List<EventObject> eventList = new ArrayList<>();
     private EventsAdapter eventsAdapter;
     private FragmentInteractionListener fragmentInteractionListener;
+
+    public List<JSONObject> savedList = new ArrayList<JSONObject>();
 
 
 
@@ -91,6 +92,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                savedList.add(new EventObject));
                 eventsAdapter.notifyDataSetChanged();
                 Toast.makeText(context, "Event has been added to your Saved Events List", Toast.LENGTH_SHORT).show();
 
@@ -149,8 +151,8 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
         @Override
         public void eventClicked(EventObject eventObject) {
             fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
-            Intent intent = new Intent(getActivity(), PurchaseActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(), PurchaseActivity.class);
+//            startActivity(intent);
         }
     };
 
