@@ -55,6 +55,8 @@ public class EventDetailsFragment extends Fragment {
 
     private static final String EVENT_OBJECT = "event_object";
     private EventObject eventObject;
+    private boolean artists = false;
+    private boolean genres = false;
 
 
     public EventDetailsFragment() {
@@ -262,27 +264,33 @@ public class EventDetailsFragment extends Fragment {
     }
 
     private void getArtists() {
-        JSONArray jsonArray = eventObject.getArtists();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                artistList.add(new ArtistObject(jsonArray.getJSONObject(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (artists == false) {
+            JSONArray jsonArray = eventObject.getArtists();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    artistList.add(new ArtistObject(jsonArray.getJSONObject(i)));
+                    artists = true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+        } else return;
     }
 
     private void getGenres() {
-        JSONArray jsonArray = eventObject.getGenres();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                genreList.add(new GenreObject(jsonArray.getJSONObject(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        if (genres == false) {
+            JSONArray jsonArray = eventObject.getGenres();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                try {
+                    genreList.add(new GenreObject(jsonArray.getJSONObject(i)));
+                    genres = true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
         }
-
     }
 
     private String getFormattedDate(String dateString) throws ParseException {

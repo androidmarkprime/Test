@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.markprime.test.FragmentInteractionListener;
+import com.example.markprime.test.Home.Events.EventsAdapter;
+import com.example.markprime.test.Home.MyTickets.MyTicketsFragment;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
 
@@ -25,15 +27,24 @@ import java.util.List;
 
 public class SavedEventsFragment extends Fragment implements SavedEventsAdapterListener {
 
-    private RecyclerView re_saved;
+    private RecyclerView re_events;
     private Context context;
-    private List<EventObject> savedList = new ArrayList<>();
-    private SavedEventsAdapter savedEventsAdapter;
-    private FragmentInteractionListener fragmentInteractionListener;
+    private List<EventObject> eventList = new ArrayList<>();
+    private EventsAdapter eventsAdapter;
+
 
     public SavedEventsFragment() {
         // Required empty public constructor
     }
+
+    public static SavedEventsFragment newInstance() {
+        SavedEventsFragment fragmentOne = new SavedEventsFragment();
+        Bundle args = new Bundle();
+        fragmentOne.setArguments(args);
+        return fragmentOne;
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,79 +54,11 @@ public class SavedEventsFragment extends Fragment implements SavedEventsAdapterL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_saved_events, container, false);
-        setupRecyclerView(view);
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-
-        getSaved();
 
         return view;
-
-
     }
-
-    public static SavedEventsFragment newInstance() {
-
-        SavedEventsFragment saved = new SavedEventsFragment();
-        Bundle args = new Bundle();
-        saved.setArguments(args);
-        return saved;
-
-    }
-
-    private void setupRecyclerView(View view){
-        re_saved = view.findViewById(R.id.re_saved_events);
-        LinearLayoutManager llm = new LinearLayoutManager(context);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        re_saved.setLayoutManager(llm);
-
-    }
-
-    private void getSaved(){
-
-        setAdapter();
-
-    }
-
-    @Override
-    public void onAttach(Context context){
-        super.onAttach(context);
-        this.context = context;
-        fragmentInteractionListener = (FragmentInteractionListener) context;
-    }
-
-    @Override
-    public void onDetach() {super.onDetach();}
-
-    private void setAdapter(){
-        savedEventsAdapter = new SavedEventsAdapter(context, savedList);
-        re_saved.setAdapter(savedEventsAdapter);
-    }
-
-
-
-    /////////////////////////// Broadcast Recievers///////////////
-
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            final NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
-            if (ni != null && ni.isConnectedOrConnecting()) {
-                if (re_saved.getAdapter() == null) {
-                    getSaved();
-
-                    ;}else
-
-                    return;
-            }
-        }
-
-
-
-    };
 
 }
 

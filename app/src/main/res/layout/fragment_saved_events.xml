@@ -4,7 +4,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Grey_LT">
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_se_main"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:id="@+id/ll_se_container">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_se_title"
+            android:layout_weight="2"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Saved Events"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/iv_se"
+            android:src="@drawable/ic_events_calendar"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/item_divider_grey"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
@@ -12,5 +53,7 @@
         android:id="@+id/re_saved_events">
 
     </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -63,34 +63,60 @@
         </RelativeLayout>
 
             <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center|start"
-            android:id="@+id/menu_my_tickets_container"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:id="@+id/menu_iv_my_tickets"
-                android:src="@drawable/ic_ticket_black"/>
+                android:gravity="center|start"
+                android:id="@+id/menu_my_tickets_container"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:id="@+id/menu_tv_my_tickets"
-                android:text="My Tickets"
-                android:layout_weight="6"/>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/menu_iv_my_tickets"
+                    android:src="@drawable/ic_ticket_black"/>
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:id="@+id/menu_tv_my_tickets"
+                    android:text="My Tickets"
+                    android:layout_weight="6"/>
 
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center|start"
+                android:id="@+id/menu_saved_events_container"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/menu_iv_saved_events"
+                    android:src="@drawable/ic_events_calendar"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:id="@+id/menu_tv_saved_events"
+                    android:text="My Saved Events"
+                    android:layout_weight="6"/>
+
+            </LinearLayout>
 
 
         <LinearLayout

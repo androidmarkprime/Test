@@ -56,12 +56,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             ll_search_bar_container, ll_menu_layout, ll_vh_frag, ll_menu_main, ll_profile,
             menu_my_tickets_container, menu_reps_container, menu_events_container,
             menu_artists_container, menu_brands_container, menu_setting_container,
-            menu_help_container;
+            menu_help_container, menu_saved_events_container;
     private DrawerLayout dl_home;
     private ImageView iv_menu, iv_search, iv_profile, menu_iv_my_tickets, menu_iv_reps, menu_iv_events,
-            menu_iv_artists, menu_iv_brands, menu_iv_settings, menu_iv_help;
+            menu_iv_artists, menu_iv_brands, menu_iv_settings, menu_iv_help, menu_iv_saved_events;
     private TextView tv_profile_name, menu_tv_my_tickets, menu_tv_reps, menu_tv_events,
-            menu_tv_artists, menu_tv_settings, menu_tv_help, menu_version;
+            menu_tv_artists, menu_tv_settings, menu_tv_help, menu_version, menu_tv_saved_events;
     private RelativeLayout rl_home_main, rl_menu_button, rl_menu;
     private TabLayout tablayout_home;
     private ViewPager vp_home;
@@ -139,6 +139,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         menu_tv_settings = findViewById(R.id.menu_tv_settings);
         menu_tv_help = findViewById(R.id.menu_tv_help);
         menu_version = findViewById(R.id.menu_version);
+        menu_saved_events_container = findViewById(R.id.menu_saved_events_container);
+        menu_iv_saved_events = findViewById(R.id.menu_iv_saved_events);
+        menu_tv_saved_events = findViewById(R.id.menu_tv_saved_events);
+
 
         rl_home_main = findViewById(R.id.rl_home_main);
         rl_menu_button = findViewById(R.id.rl_menu_button);
@@ -184,12 +188,23 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
                 }
             }
         });
-        menu_reps_container.setOnClickListener(new View.OnClickListener() {
+        menu_saved_events_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeDrawer();
                 try {
                     setMenuPage(1);
+                    Toast.makeText(HomeActivity.this, "My Tickets Clicked", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        menu_reps_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeDrawer();
+                try {
                     Toast.makeText(HomeActivity.this, "Encore Reps Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -268,11 +283,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
     }
 
 
-
-
-
-
-
     private void openDrawer() {
         dl_home.openDrawer(GravityCompat.START);
     }
@@ -339,7 +349,20 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
     protected void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+    }
 
+    @Override
+    protected void onPause() { super.onPause(); }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     private void setInitialFragment(){
@@ -400,11 +423,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //FragmentInteractionListener
 
-//    private void setEventListFragment(){
-//        transaction=fm.beginTransaction();
-//        transaction.replace(fl_vp__home.getId(), EventsFragment.newInstance()).addToBackStack(null);
-//        transaction.commit();
-//    }
 
     @Override
     public void openEventDetailsFragment(JSONObject eventDetails) {
@@ -419,6 +437,5 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
         transaction.commit();
     }
-
 
 }
