@@ -56,7 +56,7 @@ public class SavedEventsFragment extends Fragment implements SavedEventsAdapterL
 
     }
 
-    public static SavedEventsFragment newInstance(int i) {
+    public static SavedEventsFragment newInstance() {
 
         SavedEventsFragment saved = new SavedEventsFragment();
         Bundle args = new Bundle();

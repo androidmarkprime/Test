@@ -30,7 +30,7 @@ public class MyTicketsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MyTicketsFragment newInstance(int i) {
+    public static MyTicketsFragment newInstance() {
         MyTicketsFragment fragmentTwo = new MyTicketsFragment();
         Bundle args = new Bundle();
         fragmentTwo.setArguments(args);

@@ -17,13 +17,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.example.markprime.test.Checkout.CheckoutFragment;
 import com.example.markprime.test.EventDetails.EventDetailsFragment;
 import com.example.markprime.test.EventList.EventListFragment;
@@ -41,24 +46,32 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
 
     private LinearLayout ll_menu, ll_home_main, ll_profile_contaner, ll_loader,
+            ll_search_container,ll_search_bar_container,
+            ll_menu_layout, ll_vh_frag,
             menu_my_tickets_container, menu_reps_container,
             menu_events_container, menu_artists_container,
             menu_brands_container, menu_setting_container,
             menu_help_container;
     private DrawerLayout dl_home;
+    private ImageView iv_menu, iv_search, iv_home_divider;
+    private RelativeLayout rl_home_main, rl_menu_button;
     private TabLayout tablayout_home;
     private ViewPager vp_home;
     private FrameLayout fl_vp__home;
     private Button btn_menu;
+    private RippleView rv_edit_text;
+    private EditText et_search_field;
 
     private boolean drawerOpen = false;
     private Boolean loaderVisible = false;
 
-    private Context context;
+    private Context mContext;
 
     public  FragmentManager fm;
     private FragmentTransaction transaction;
-    public  FragmentPagerAdapter adapterViewPager;
+
+
+    public Fragment fragment_events, fragment_saved_events, fragment_my_tickets;
 
 
     @Override
@@ -66,85 +79,27 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        final ViewPager vpPager = findViewById(R.id.vp_home);
-        adapterViewPager = new ViewPagerAdapter(getSupportFragmentManager(), HomeActivity.this);
-        vpPager.setAdapter(adapterViewPager);
 
-        setupLoader();
+
+        setupTextViews();
+        setupButtons();
+        setupImageViews();
+        setupLayouts();
+        setDrawerLayout();
+        setupFragManager();
+        setUpPagerDetails();
+        setUpEditText();
+
+        setUpPagerAdapter();
+
 
         setupFM();
         setupViews();
-        setDrawerLayout();
-        setupButtons();
         setupMenu();
 
-        TabLayout tabLayout = findViewById(R.id.tablayout_home);
-        tablayout_home.setupWithViewPager(vpPager);
+
 
     }
-
-
-    public static class ViewPagerAdapter extends FragmentPagerAdapter{
-        private static int num = 3;
-        private Context context;
-        private String tabTitles[] = new String[] {"Events", "Saved Events", "My Tickets"};
-
-        SparseArray<Fragment> cache = new SparseArray<>();
-
-        public ViewPagerAdapter(FragmentManager fm, Context context) {
-            super(fm);
-            this.context = context;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            Fragment f = cache.get(position, null);
-
-            if (f == null) {
-                switch (position) {
-                    case 0:
-                        f = EventsFragment.newInstance(0);
-
-                        break;
-                    case 1:
-                        f = SavedEventsFragment.newInstance(1);
-                        break;
-                    case 2:
-                        f = MyTicketsFragment.newInstance(2);
-                        break;
-                    default:
-                        return null;
-                }
-                cache.put(position, f);
-            }
-
-            return f;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            super.destroyItem(container, position, object);
-            cache.remove(position);
-        }
-
-        @Override
-        public int getCount() {
-            return tabTitles.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            // Generate title based on item position
-            return tabTitles[position];
-        }
-
-    }
-
-    private void setupLoader(){
-        ll_loader = findViewById(R.id.ll_loader);
-    }
-
-
 
     private void setupViews(){
         menu_my_tickets_container = findViewById(R.id.menu_my_tickets_container);
@@ -184,9 +139,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
-
-
-
                     Toast.makeText(HomeActivity.this, "My Tickets Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -211,6 +163,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
                 closeDrawer();
                 try {
                     Toast.makeText(HomeActivity.this, "Events Clicked", Toast.LENGTH_SHORT).show();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -272,6 +225,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
 
     }
+
+
+
+
+
+
 
     private void openDrawer() {
         dl_home.openDrawer(GravityCompat.START);
@@ -355,7 +314,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
     private void setEventListFragment(){
         transaction=fm.beginTransaction();
-        transaction.replace(fl_vp__home.getId(), EventsFragment.newInstance(0)).addToBackStack(null);
+        transaction.replace(fl_vp__home.getId(), EventsFragment.newInstance()).addToBackStack(null);
         transaction.commit();
     }
 

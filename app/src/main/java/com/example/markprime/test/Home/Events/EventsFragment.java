@@ -45,7 +45,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
 
     public EventsFragment(){}
 
-    public static EventsFragment newInstance(int i) {
+    public static EventsFragment newInstance() {
         EventsFragment fragment = new EventsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
