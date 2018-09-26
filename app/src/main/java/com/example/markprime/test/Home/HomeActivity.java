@@ -43,6 +43,8 @@ import com.example.markprime.test.Purchase.PurchaseActivity;
 import com.example.markprime.test.R;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -145,8 +147,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         tablayout_home = findViewById(R.id.tablayout_home);
         ll_menu = findViewById(R.id.ll_menu);
         fl_vp__home = findViewById(R.id.fl_vp__home);
-
-        tablayout_home.setupWithViewPager(vp_home);
 
         rv_edit_text = findViewById(R.id.rv_edit_text);
         menu_view = findViewById(R.id.menu_view);
@@ -369,6 +369,30 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
                 }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onNavigationEvent(FragmentEvent event) {
+            transaction = fm.beginTransaction();
+            switch (event.id) {
+                case "Events":
+                    transaction.replace(fl_vp__home.getId(), EventsFragment.newInstance()).commitNowAllowingStateLoss();
+                    return;
+                case "Saved Events":
+                    transaction.replace(fl_vp__home.getId(), SavedEventsFragment.newInstance());
+
+                    break;
+                case "My Tickets":
+                    transaction.replace(fl_vp__home.getId(), MyTicketsFragment.newInstance());
+                    break;
+            }
+
+            try {
+                transaction.addToBackStack(null);
+                transaction.commit();
+            } catch (Exception ee) {
+
+            }
+    }
+
 
 
 
@@ -376,11 +400,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //FragmentInteractionListener
 
-    private void setEventListFragment(){
-        transaction=fm.beginTransaction();
-        transaction.replace(fl_vp__home.getId(), EventsFragment.newInstance()).addToBackStack(null);
-        transaction.commit();
-    }
+//    private void setEventListFragment(){
+//        transaction=fm.beginTransaction();
+//        transaction.replace(fl_vp__home.getId(), EventsFragment.newInstance()).addToBackStack(null);
+//        transaction.commit();
+//    }
 
     @Override
     public void openEventDetailsFragment(JSONObject eventDetails) {
