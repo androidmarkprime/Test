@@ -12,18 +12,20 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:id="@+id/ll_menu_main"
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/rl_menu"
             android:layout_height="100dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:scaleType="centerCrop"
             android:background="@drawable/skiddle_overview"
-            android:id="@+id/img_background_avatar"
+            android:id="@+id/ll_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -198,11 +200,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
+                android:id="@+id/menu_iv_brands"
                 android:src="@drawable/ic_star_outline"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/menu_tv_brands"
                 android:textSize="16dp"
                 android:text="Brands"
                 android:layout_weight="6"/>
@@ -226,12 +230,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="10dp"
+                android:id="@+id/menu_iv_settings"
                 android:src="@drawable/ic_sign_out"/>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
+                android:id="@+id/menu_tv_settings"
                 android:text="Settings"
                 android:layout_weight="6"/>
 
@@ -251,6 +257,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/menu_iv_help"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/ic_help"/>
 
@@ -258,6 +265,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
+                    android:id="@+id/menu_tv_help"
                     android:text="Help"
                     android:layout_weight="6"/>
 
@@ -268,11 +276,13 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:id="@+id/menu_view"
             android:layout_weight="1"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/menu_version"
             android:text="VERSION #TEST"/>
 
 
