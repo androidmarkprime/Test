@@ -40,18 +40,24 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class EventDetailsFragment extends Fragment {
+public class EventDetailsFragment extends Fragment implements EventDetailsAdapterListener{
 
     private Context context;
     private FragmentInteractionListener fragmentInteractionListener;
     private LinearLayout venue_phone_group;
-    private ImageView event_details_image, share_messenger, share_whatsApp, share_fb, artist_spotify, share_general, share_twitter;
-    private TextView event_name, event_min_age, doors_last_entry_info_1, event_date, event_description, doors_open_info, doors_open, doors_close_info, doors_close, doors_last_entry_info, last_entry, venue_name, venue_add, venue_town, venue_pc, venue_phone, artist_info, genre_info;
+    private ImageView event_details_image, share_messenger, share_whatsApp,
+            share_fb, artist_spotify, share_general, share_twitter;
+    private TextView event_name, event_min_age, doors_last_entry_info_1,
+            event_date, event_description, doors_open_info, doors_open,
+            doors_close_info, doors_close, doors_last_entry_info, last_entry,
+            venue_name, venue_add, venue_town, venue_pc, venue_phone, artist_info,
+            genre_info;
     private RecyclerView re_artist_details, re_genre_details;
     private List<ArtistObject> artistList = new ArrayList<>();
     private List<GenreObject> genreList = new ArrayList<>();
     private ArtistListAdapter artistListAdapter;
     private GenreListAdapter genreListAdapter;
+    private Button buy_tickets_button;
 
     private static final String EVENT_OBJECT = "event_object";
     private EventObject eventObject;
@@ -90,8 +96,20 @@ public class EventDetailsFragment extends Fragment {
         setupImageViews(view);
         setupLayoutViews(view);
         setAdapters();
+        setupButton(view);
 
         return view;
+    }
+
+    private void setupButton(View view) {
+        buy_tickets_button = view.findViewById(R.id.buy_tickets_button);
+
+        buy_tickets_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buyClicked(eventObject);
+            }
+        });
     }
 
 
@@ -329,8 +347,8 @@ public class EventDetailsFragment extends Fragment {
         startActivity(Intent.createChooser(sendIntent, "Share via.."));
     }
 
-
-    public void openCheckOutFragment(View view) {
-        fragmentInteractionListener.openCheckOutFragment(view);
+    @Override
+    public void buyClicked(EventObject eventObject) {
+        fragmentInteractionListener.openCheckOutFragment(eventObject.getFullObject());
     }
 }

@@ -39,9 +39,6 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     private EventsAdapter eventsAdapter;
     private FragmentInteractionListener fragmentInteractionListener;
 
-    public List<JSONObject> savedList = new ArrayList<JSONObject>();
-
-
 
     public EventsFragment(){}
 
@@ -151,8 +148,6 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
         @Override
         public void eventClicked(EventObject eventObject) {
             fragmentInteractionListener.openEventDetailsFragment(eventObject.getFullObject());
-//            Intent intent = new Intent(getActivity(), PurchaseActivity.class);
-//            startActivity(intent);
         }
     };
 

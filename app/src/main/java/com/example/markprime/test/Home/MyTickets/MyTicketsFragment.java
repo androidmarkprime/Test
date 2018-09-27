@@ -11,9 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
+import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Home.Events.EventsAdapter;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,10 @@ public class MyTicketsFragment extends Fragment {
     private Context context;
     private List<EventObject> eventList = new ArrayList<>();
     private EventsAdapter eventsAdapter;
+    private FragmentInteractionListener fragmentInteractionListener;
+
+    private static final String EVENT_OBJECT = "event_object";
+    private EventObject eventObject;
 
 
     public MyTicketsFragment() {
@@ -33,6 +40,14 @@ public class MyTicketsFragment extends Fragment {
     public static MyTicketsFragment newInstance() {
         MyTicketsFragment fragmentTwo = new MyTicketsFragment();
         Bundle args = new Bundle();
+        fragmentTwo.setArguments(args);
+        return fragmentTwo;
+    }
+
+    public static MyTicketsFragment newInstance(JSONObject eventDetails) {
+        MyTicketsFragment fragmentTwo = new MyTicketsFragment();
+        Bundle args = new Bundle();
+        args.putString(EVENT_OBJECT, eventDetails.toString());
         fragmentTwo.setArguments(args);
         return fragmentTwo;
     }
@@ -51,6 +66,27 @@ public class MyTicketsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_tickets, container, false);
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        fragmentInteractionListener = (FragmentInteractionListener) context;
+
+        if (getArguments() != null) {
+            try {
+                eventObject = new EventObject(new JSONObject(getArguments().getString(EVENT_OBJECT)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
     }
 
 

@@ -5,22 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.SyncStateContract;
-import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseArray;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -33,13 +26,10 @@ import android.widget.Toast;
 import com.andexert.library.RippleView;
 import com.example.markprime.test.Checkout.CheckoutFragment;
 import com.example.markprime.test.EventDetails.EventDetailsFragment;
-import com.example.markprime.test.EventList.EventListFragment;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Home.Events.EventsFragment;
 import com.example.markprime.test.Home.MyTickets.MyTicketsFragment;
 import com.example.markprime.test.Home.SavedEvents.SavedEventsFragment;
-import com.example.markprime.test.Model.EventObject;
-import com.example.markprime.test.Purchase.PurchaseActivity;
 import com.example.markprime.test.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -267,10 +257,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
-//                    String url = "https://help.skiddle.com/";
-//                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-//                    CustomTabsIntent customTabsIntent = builder.build();
-//                    customTabsIntent.launchUrl(Uri.parse(url));
+
+                    Intent help = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skiddle.com/help"));
+                    startActivity(help);
                     Toast.makeText(HomeActivity.this, "Help Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -432,10 +421,18 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
         transaction.commit();
     }
 
-    public void openCheckOutFragment(View view) {
+    public void openCheckOutFragment(JSONObject eventDetails) {
         transaction = fm.beginTransaction();
-        transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance()).addToBackStack(null);
+        transaction.replace(fl_vp__home.getId(), CheckoutFragment.newInstance(eventDetails)).addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void openMyTicketsFragment(JSONObject eventDetails) {
+        transaction = fm.beginTransaction();
+        transaction.replace(fl_vp__home.getId(), MyTicketsFragment.newInstance(eventDetails)).addToBackStack(null);
+        transaction.commit();
+
     }
 
 }

@@ -21,15 +21,21 @@ import android.widget.Toast;
 
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.DeliveryObject;
+import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Model.OptOutObject;
 import com.example.markprime.test.Model.PaymentObject;
 import com.example.markprime.test.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class CheckoutFragment extends Fragment implements View.OnClickListener, DeliveryAdapterListener, PaymentAdapterListener, OptOutAdapterListener {
+public class CheckoutFragment
+        extends Fragment
+        implements View.OnClickListener, DeliveryAdapterListener,
+        PaymentAdapterListener, OptOutAdapterListener{
 
     private Context context;
     private FragmentInteractionListener fragmentInteractionListener;
@@ -49,6 +55,9 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
     private OptOutAdapter optOutAdapter;
     private PaymentAdapter paymentAdapter;
 
+    private static final String EVENT_OBJECT = "event_object";
+    private EventObject eventObject;
+
     private boolean refundProtectionEnabled = false, charityDonationEnabled = false;
     private boolean payWithCard = false, payWithGoogle = false;
     private boolean RapidScan = false, Posted = false, Collect = false;
@@ -63,9 +72,10 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         // Required empty public constructor
     }
 
-    public static CheckoutFragment newInstance(){
+    public static CheckoutFragment newInstance(JSONObject eventDetails){
         CheckoutFragment fragment = new CheckoutFragment();
         Bundle args = new Bundle();
+        args.putString(EVENT_OBJECT, eventDetails.toString());
         fragment.setArguments(args);
         return fragment;
     }
@@ -123,6 +133,14 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         super.onAttach(context);
         this.context = context;
         fragmentInteractionListener = (FragmentInteractionListener) context;
+
+        if (getArguments() != null) {
+            try {
+                eventObject = new EventObject(new JSONObject(getArguments().getString(EVENT_OBJECT)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -189,6 +207,13 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
         ll_gpay_container.setOnClickListener(this);
         ll_card_conatiner.setOnClickListener(this);
         ll_comms_preferences.setOnClickListener(this);
+
+        pay_button_ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                totalClicked(eventObject);
+            }
+        });
 
 
     }
@@ -539,5 +564,10 @@ public class CheckoutFragment extends Fragment implements View.OnClickListener, 
 
         }
 
+    }
+
+
+    public void totalClicked(EventObject eventObject) {
+        fragmentInteractionListener.openMyTicketsFragment(eventObject.getFullObject());
     }
 }
