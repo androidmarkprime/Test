@@ -356,7 +356,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
     private void setInitialFragment(){
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(fl_vp__home.getId(), ViewHolderFragment.newInstance()).addToBackStack(null);
+        transaction.replace(fl_vp__home.getId(), ViewHolderFragment.newInstance());
         transaction.commit();
     }
 

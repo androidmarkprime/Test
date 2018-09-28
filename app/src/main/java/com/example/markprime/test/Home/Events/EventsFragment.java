@@ -23,6 +23,7 @@ import com.example.markprime.test.Network.NetworkManager;
 import com.example.markprime.test.Network.VolleySingletonErrorListener;
 import com.example.markprime.test.Network.VolleySingletonListener;
 import com.example.markprime.test.R;
+import com.example.markprime.test.utils.SharedPrefs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +39,9 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     private List<EventObject> eventList = new ArrayList<>();
     private EventsAdapter eventsAdapter;
     private FragmentInteractionListener fragmentInteractionListener;
+
+    public static final String SAVED_EVENT = "save_list";
+    SharedPrefs sharedPrefs;
 
 
     public EventsFragment(){}
@@ -72,7 +76,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
         return view;
     }
 
-    private void setUpRecyclerView(View view) {
+    private void setUpRecyclerView(final View view) {
         re_events = view.findViewById(R.id.re_events);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -89,7 +93,9 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-//                savedList.add(new EventObject));
+
+//                sharedPrefs.addEvents(context, eventsAdapter.getItem(viewHolder.getAdapterPosition()));
+
                 eventsAdapter.notifyDataSetChanged();
                 Toast.makeText(context, "Event has been added to your Saved Events List", Toast.LENGTH_SHORT).show();
 

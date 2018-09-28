@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
+import com.example.markprime.test.utils.SharedPrefs;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -26,11 +27,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     private Context context;
     private List<EventObject> eventObjects;
     private EventsAdapterListener eventsAdapterListener;
+    SharedPrefs sharedPrefs;
 
     public EventsAdapter (Context context, List<EventObject> eventObjects, EventsAdapterListener eventsAdapterListener) {
         this.context = context;
         this.eventObjects = eventObjects;
         this.eventsAdapterListener = eventsAdapterListener;
+        sharedPrefs = new SharedPrefs();
     }
 
     @NonNull
@@ -101,6 +104,43 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         Date newDate = format.parse(dateString);
         format = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.UK);
         return format.format(newDate);
+    }
+
+
+    public EventObject getItem(int position) {
+        return eventObjects.get(position);
+    }
+
+
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    /*Checks whether a particular events exists in SharedPreferences*/
+    public boolean checkEventItem(EventObject checkEvent) {
+        boolean check = false;
+        List<EventObject> saved = sharedPrefs.getEvents(context);
+        if (saved != null) {
+            for (EventObject eventObject : saved) {
+                if (eventObject.equals(checkEvent)) {
+                    check = true;
+                    break;
+                }
+            }
+        }
+        return check;
+    }
+
+
+    public void add(EventObject eventObject) {
+        eventObjects.add(eventObject);
+        notifyDataSetChanged();
+    }
+
+
+    public void remove(EventObject eventObject) {
+        eventObjects.remove(eventObject);
+        notifyDataSetChanged();
     }
 
 }

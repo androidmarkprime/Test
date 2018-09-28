@@ -73,7 +73,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         return eventObjects.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView event_image;
         private TextView event_name;

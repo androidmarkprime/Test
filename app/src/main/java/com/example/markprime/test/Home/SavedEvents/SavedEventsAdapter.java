@@ -1,6 +1,7 @@
 package com.example.markprime.test.Home.SavedEvents;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
+import com.example.markprime.test.utils.SharedPrefs;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -26,11 +28,13 @@ public class SavedEventsAdapter  extends RecyclerView.Adapter<SavedEventsAdapter
     private List<EventObject> eventObjects;
     private SavedEventsAdapterListener savedEventsAdapterListener;
 
+
     public SavedEventsAdapter(Context context, List<EventObject> eventObjects){
 
         this.context = context;
         this.eventObjects = eventObjects;
         this.savedEventsAdapterListener = savedEventsAdapterListener;
+
     }
 
 
@@ -71,6 +75,11 @@ public class SavedEventsAdapter  extends RecyclerView.Adapter<SavedEventsAdapter
     @Override
     public int getItemCount() { return eventObjects.size(); }
 
+
+
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView event_image;
@@ -98,4 +107,7 @@ public class SavedEventsAdapter  extends RecyclerView.Adapter<SavedEventsAdapter
         format = new SimpleDateFormat("EEEE dd MMMM yyyy", Locale.UK);
         return format.format(newDate);
     }
+
+
+
 }

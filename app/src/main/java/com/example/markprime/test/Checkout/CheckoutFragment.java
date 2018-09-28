@@ -40,8 +40,8 @@ public class CheckoutFragment
     private Context context;
     private FragmentInteractionListener fragmentInteractionListener;
     private LinearLayout checkout_ll, ll_extras_container,
-            ll_card_conatiner, ll_payment_container, ll_gpay_container, ll_extras_1_container,
-            ll_extras_2_container, pay_button_ll, ll_cd_container, ll_rp_container,
+            ll_card_conatiner, ll_payment_container, ll_gpay_container,
+            ll_extras_1_container, ll_extras_2_container, pay_button_ll, ll_cd_container, ll_rp_container,
             ll_card_input_conatiner, ll_comms_preferences,ll_delivery_options, ll_optOut;
     private RecyclerView re_delivery, re_summary, re_opt_out_choices;
     private ImageView iv_gpay_icon, iv_card_icon;
@@ -63,6 +63,10 @@ public class CheckoutFragment
     private boolean RapidScan = false, Posted = false, Collect = false;
     private boolean personalised = false, targetted = false;
     private double totalPrice = 0.00;
+
+    private boolean deliveryDetails = false;
+    private boolean optOutDetails = false;
+    private boolean paymentDetails = false;
 
 
     private List<PaymentObject> paymentObject = new ArrayList<>();
@@ -95,24 +99,34 @@ public class CheckoutFragment
 
         setupCheckoutViews(view);
 
-        List<DeliveryObject> deliveryObjects = deliveryObject;
-        deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_rapid_scan),
-                "RapidScan", "Tickets in your mobile app.", "0.50"));
-        deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_posted_tickets),
-                "Posted", "Tickets delivered to your door.", "3.99"));
-        deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_collect_tickets),
-                "Collect", "Collect your tickets on arrival at the venue.", "1.00"));
 
+            List<DeliveryObject> deliveryObjects = deliveryObject;
+            if (deliveryDetails == false) {
+                deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_rapid_scan),
+                        "RapidScan", "Tickets in your mobile app.", "0.50"));
+                deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_posted_tickets),
+                        "Posted", "Tickets delivered to your door.", "3.99"));
+                deliveryObjects.add(new DeliveryObject(ContextCompat.getDrawable(context, R.mipmap.icn_collect_tickets),
+                        "Collect", "Collect your tickets on arrival at the venue.", "1.00"));
+            deliveryDetails = true;
+            }
 
-        List<OptOutObject> optOutObjects = new ArrayList<>();
-        optOutObjects.add(
-                new OptOutObject("I'd prefer NOT to receive a weekly personalised events guide"));
-        optOutObjects.add(
-                new OptOutObject("I'd prefer NOT to receive a targetted event information"));
+            List<OptOutObject> optOutObjects = new ArrayList<>();
+            if (optOutDetails == false) {
+                optOutObjects.add(
+                        new OptOutObject("I'd prefer NOT to receive a weekly personalised events guide"));
+                optOutObjects.add(
+                        new OptOutObject("I'd prefer NOT to receive a targetted event information"));
 
-        List<PaymentObject> paymentObjects = paymentObject;
-        paymentObjects.add(
-                new PaymentObject("2 x", "Standard Entry Tickets", "50.00"));
+                optOutDetails = true;
+            }
+
+            List<PaymentObject> paymentObjects = paymentObject;
+            if(paymentDetails == false) {
+                paymentObjects.add(
+                        new PaymentObject("2 x", "Standard Entry Tickets", "50.00"));
+            paymentDetails = true;
+            }
 
 
         setAdapters(deliveryObjects, optOutObjects, paymentObjects);
