@@ -112,11 +112,16 @@ public class SavedEventsFragment extends Fragment implements SavedEventsAdapterL
         super.onDetach();
     }
 
+
     private void setAdapter() {
         savedEventsAdapter = new SavedEventsAdapter(context, eventList);
 //        Collections.shuffle(eventList);
         re_saved_events.setAdapter(savedEventsAdapter);
+
+        re_saved_events.addOnChildAttachStateChangeListener(savedEventsAdapter);
     }
+
+
 
 }
 

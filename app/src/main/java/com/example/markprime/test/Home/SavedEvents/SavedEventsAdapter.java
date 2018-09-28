@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class SavedEventsAdapter  extends RecyclerView.Adapter<SavedEventsAdapter.ViewHolder>{
+public class SavedEventsAdapter  extends RecyclerView.Adapter<SavedEventsAdapter.ViewHolder> implements RecyclerView.OnChildAttachStateChangeListener {
 
     private Context context;
     private List<EventObject> eventObjects;
@@ -75,9 +75,15 @@ public class SavedEventsAdapter  extends RecyclerView.Adapter<SavedEventsAdapter
     @Override
     public int getItemCount() { return eventObjects.size(); }
 
+    @Override
+    public void onChildViewAttachedToWindow(View view) {
 
+    }
 
+    @Override
+    public void onChildViewDetachedFromWindow(View view) {
 
+    }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

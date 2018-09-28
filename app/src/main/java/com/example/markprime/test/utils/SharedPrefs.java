@@ -42,10 +42,10 @@ public class SharedPrefs {
 
     public void addEvents(Context context, EventObject eventObject) {
         List<EventObject> save = getEvents(context);
-        if (save == null)
-            save = new ArrayList<EventObject>();
-        save.add(eventObject);
-        saveEvents(context, save);
+            if (save == null)
+                save = new ArrayList<EventObject>();
+            save.add(eventObject);
+            saveEvents(context, save);
     }
 
     public void removeEvents(Context context, EventObject eventObject) {
@@ -54,6 +54,7 @@ public class SharedPrefs {
             save.remove(eventObject);
             saveEvents(context, save);
         }
+
     }
 
     public ArrayList<EventObject> getEvents(Context context) {
@@ -136,6 +137,5 @@ public class SharedPrefs {
 
         return (ArrayList<EventObject>) ticket;
     }
-
 
 }

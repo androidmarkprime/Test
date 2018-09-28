@@ -31,6 +31,7 @@ import com.example.markprime.test.Home.Events.EventsFragment;
 import com.example.markprime.test.Home.MyTickets.MyTicketsFragment;
 import com.example.markprime.test.Home.SavedEvents.SavedEventsFragment;
 import com.example.markprime.test.R;
+import com.example.markprime.test.utils.SharedPrefs;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -67,6 +68,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
 
     public  FragmentManager fm;
     private FragmentTransaction transaction;
+    SharedPrefs sharedPrefs;
 
 
     public Fragment fragment_events, fragment_saved_events, fragment_my_tickets;
@@ -184,7 +186,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
                 closeDrawer();
                 try {
                     setMenuPage(1);
-                    Toast.makeText(HomeActivity.this, "My Tickets Clicked", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "My Saved Events Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -195,6 +197,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
+//                    setMenuPage();
                     Toast.makeText(HomeActivity.this, "Encore Reps Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -221,6 +224,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
+//                    setMenuPage();
                     Toast.makeText(HomeActivity.this, "Artists Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -233,6 +237,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
+//                    setMenuPage();
                     Toast.makeText(HomeActivity.this, "Brands Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -245,6 +250,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
+
                     Toast.makeText(HomeActivity.this, "Settings Clicked", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -257,7 +263,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
             public void onClick(View v) {
                 closeDrawer();
                 try {
-
                     Intent help = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skiddle.com/help"));
                     startActivity(help);
                     Toast.makeText(HomeActivity.this, "Help Clicked", Toast.LENGTH_SHORT).show();

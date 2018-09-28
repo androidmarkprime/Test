@@ -19,6 +19,7 @@ import com.example.markprime.test.Model.ArtistObject;
 import com.example.markprime.test.Model.DeliveryObject;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
+import com.example.markprime.test.utils.SharedPrefs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class MyTicketsFragment extends Fragment {
 
     private static final String EVENT_OBJECT = "event_object";
     private EventObject eventObject;
+    SharedPrefs sharedPrefs;
 
 
     public MyTicketsFragment() {
@@ -75,11 +77,24 @@ public class MyTicketsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_tickets, container, false);
 
-//        setupRecycler(view);
+        sharedPrefs = new SharedPrefs();
+        ticketList = sharedPrefs.getTickets(context);
+
+
+        if(ticketList !=null){
+            setupRecycler(view);
+            setAdapter();
+        }else{
+
+        }
 //        loadTickets();
 
-
         return view;
+    }
+
+    private void setAdapter() {
+        myTicketsAdapter = new MyTicketsAdapter(context, ticketList);
+        re_my_tickets.setAdapter(myTicketsAdapter);
     }
 
     private void loadTickets() {
@@ -103,13 +118,13 @@ public class MyTicketsFragment extends Fragment {
         this.context = context;
         fragmentInteractionListener = (FragmentInteractionListener) context;
 
-//        if (getArguments() != null) {
-//            try {
-//                eventObject = new EventObject(new JSONObject(getArguments().getString(EVENT_OBJECT)));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        if (getArguments() != null) {
+            try {
+                eventObject = new EventObject(new JSONObject(getArguments().getString(EVENT_OBJECT)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

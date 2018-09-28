@@ -25,6 +25,7 @@ import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Model.OptOutObject;
 import com.example.markprime.test.Model.PaymentObject;
 import com.example.markprime.test.R;
+import com.example.markprime.test.utils.SharedPrefs;
 
 import org.json.JSONObject;
 
@@ -72,6 +73,9 @@ public class CheckoutFragment
     private List<PaymentObject> paymentObject = new ArrayList<>();
     private List<DeliveryObject> deliveryObject = new ArrayList<>();
 
+    private List<EventObject> eventList = new ArrayList<>();
+    SharedPrefs sharedPrefs;
+
     public CheckoutFragment() {
         // Required empty public constructor
     }
@@ -87,6 +91,7 @@ public class CheckoutFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        sharedPrefs = new SharedPrefs();
     }
 
 
@@ -583,5 +588,6 @@ public class CheckoutFragment
 
     public void totalClicked(EventObject eventObject) {
         fragmentInteractionListener.openMyTicketsFragment(eventObject.getFullObject());
+        sharedPrefs.addTicket(context, eventObject);
     }
 }
