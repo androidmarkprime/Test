@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Home.Events.EventsAdapter;
@@ -28,15 +30,13 @@ import java.util.List;
 
 public class SavedEventsFragment extends Fragment implements SavedEventsAdapterListener {
 
-    private RecyclerView re_events;
+    private RecyclerView re_saved_events;
     private FragmentInteractionListener fragmentInteractionListener;
     private SavedEventsContract.Presenter presenter;
     private Context context;
     private List<EventObject> eventList = new ArrayList<>();
-    private EventsAdapter eventsAdapter;
+    private SavedEventsAdapter savedEventsAdapter;
     SharedPrefs sharedPrefs;
-
-    private ArrayList<EventObject> saved;
 
     private static final String SAVED = "saved";
 
@@ -77,19 +77,24 @@ public class SavedEventsFragment extends Fragment implements SavedEventsAdapterL
 
         // Get favorite items from SharedPreferences.
         sharedPrefs = new SharedPrefs();
-        saved = sharedPrefs.getEvents(context);
+        eventList = sharedPrefs.getEvents(context);
 
-//        setupRecycler(view);
+        if(eventList != null) {
+            setupRecycler(view);
+            setAdapter();
+        } else{
+
+        }
 
         return view;
     }
 
     private void setupRecycler(View view) {
 
-        re_events = view.findViewById(R.id.re_events);
+        re_saved_events = view.findViewById(R.id.re_saved_events);
         LinearLayoutManager llmSaved = new LinearLayoutManager(context);
         llmSaved.setOrientation(LinearLayoutManager.VERTICAL);
-        re_events.setLayoutManager(llmSaved);
+        re_saved_events.setLayoutManager(llmSaved);
     }
 
     @Override
@@ -105,6 +110,12 @@ public class SavedEventsFragment extends Fragment implements SavedEventsAdapterL
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void setAdapter() {
+        savedEventsAdapter = new SavedEventsAdapter(context, eventList);
+//        Collections.shuffle(eventList);
+        re_saved_events.setAdapter(savedEventsAdapter);
     }
 
 }

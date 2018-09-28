@@ -56,6 +56,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPrefs = new SharedPrefs();
     }
 
     @Override
@@ -94,7 +95,7 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
-//                sharedPrefs.addEvents(context, eventsAdapter.getItem(viewHolder.getAdapterPosition()));
+                sharedPrefs.addEvents(context, eventsAdapter.getItem(viewHolder.getAdapterPosition()));
 
                 eventsAdapter.notifyDataSetChanged();
                 Toast.makeText(context, "Event has been added to your Saved Events List", Toast.LENGTH_SHORT).show();

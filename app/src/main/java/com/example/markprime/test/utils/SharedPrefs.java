@@ -17,13 +17,13 @@ public class SharedPrefs {
     public static final String PREFS_SAVED = "PREFS_SAVED";
     public static final String SAVED = "Saved";
     public static final String PREFS_TICKETS = "PREFS_TICKETS";
-    public static final String TIKCETS = "Tickets";
+    public static final String TICKETS = "Tickets";
 
     public SharedPrefs() {
         super();
     }
 
-    // This four methods are used for maintaining favorites.
+    ///////Saved Events ///////////////////////
     public void saveEvents(Context context, List<EventObject> save) {
         SharedPreferences settings;
         Editor editor;
@@ -75,6 +75,66 @@ public class SharedPrefs {
             return null;
 
         return (ArrayList<EventObject>) save;
+    }
+
+
+
+    /////////////////Purchased Tickets/////////////////
+
+
+
+    // This four methods are used for maintaining favorites.
+    public void saveTicket(Context context, List<EventObject> ticket) {
+        SharedPreferences settings;
+        Editor editor;
+
+        settings = context.getSharedPreferences(PREFS_TICKETS,
+                Context.MODE_PRIVATE);
+        editor = settings.edit();
+
+        Gson gson = new Gson();
+        String jsonTickets = gson.toJson(ticket);
+
+        editor.putString(TICKETS, jsonTickets);
+
+        editor.apply();
+    }
+
+    public void addTicket(Context context, EventObject eventObject) {
+        List<EventObject> ticket = getTickets(context);
+        if (ticket == null)
+            ticket = new ArrayList<EventObject>();
+        ticket.add(eventObject);
+        saveTicket(context, ticket);
+    }
+
+    public void removeTicket(Context context, EventObject eventObject) {
+        ArrayList<EventObject> ticket = getTickets(context);
+        if (ticket != null) {
+            ticket.remove(eventObject);
+            saveTicket(context, ticket);
+        }
+    }
+
+    public ArrayList<EventObject> getTickets(Context context) {
+        SharedPreferences settings;
+        List<EventObject> ticket;
+
+        settings = context.getSharedPreferences(PREFS_TICKETS,
+                Context.MODE_PRIVATE);
+
+        if (settings.contains(TICKETS)) {
+            String jsonFavorites = settings.getString(TICKETS, null);
+            Gson gson = new Gson();
+            EventObject[] ticketItems = gson.fromJson(jsonFavorites,
+                    EventObject[].class);
+
+            ticket = Arrays.asList(ticketItems);
+            ticket = new ArrayList<EventObject>(ticket);
+        } else
+            return null;
+
+        return (ArrayList<EventObject>) ticket;
     }
 
 
