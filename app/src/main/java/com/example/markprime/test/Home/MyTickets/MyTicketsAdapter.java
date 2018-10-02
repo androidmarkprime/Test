@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.markprime.test.Model.EventObject;
@@ -20,10 +21,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static android.view.View.GONE;
+
 public class MyTicketsAdapter extends RecyclerView.Adapter<MyTicketsAdapter.ViewHolder> {
 
     private Context context;
     private List<EventObject> eventObjects;
+    private boolean showTicket = false;
 
 
     public MyTicketsAdapter (Context context, List<EventObject> eventObjects){
@@ -34,26 +38,36 @@ public class MyTicketsAdapter extends RecyclerView.Adapter<MyTicketsAdapter.View
     @NonNull
     @Override
     public MyTicketsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.model_event_list, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.model_ticket_item, parent, false);
         return new MyTicketsAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
     Picasso.get()
                 .load(eventObjects.get(position).getImageUrl())
                 .noFade()
-                .into(holder.event_image);
-        holder.event_name.setText(eventObjects.get(position).getEventName());
+                .into(holder.iv_event_image);
+        holder.tv_event_name.setText(eventObjects.get(position).getEventName());
         try {
-            holder.event_date.setText(getFormattedDate(eventObjects.get(position).getDate()));
+            holder.tv_event_date.setText(getFormattedDate(eventObjects.get(position).getDate()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        holder.event_venue_name.setText(eventObjects.get(position).getVenueName());
-        holder.event_venue_town.setText(eventObjects.get(position).getVenueTown());
+        holder.tv_ticket_price.setText(eventObjects.get(position).getEntryPrice());
 
+        holder.rl_ticket_item_main.setOnClickListener(new View.OnClickListener(){
+            @Override public void onClick(View view){
+                    if(holder.rl_ticket_details.getVisibility() == GONE){
+                    holder.rl_ticket_details.setVisibility(View.VISIBLE);
+                    } else{
+                        holder.rl_ticket_details.setVisibility(GONE);
+                    }
+
+                }
+
+        });
 
         }
 
@@ -64,25 +78,22 @@ public class MyTicketsAdapter extends RecyclerView.Adapter<MyTicketsAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView event_image;
-        private TextView event_name;
-        private TextView event_date;
-        private TextView event_venue_name;
-        private TextView event_venue_town;
+        private ImageView iv_event_image;
+        private TextView tv_event_name, tv_event_date, tv_ticket_price;
 
-        private LinearLayout ll_parent;
+        private RelativeLayout rl_ticket_item_main, rl_ticket_details;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            event_image = itemView.findViewById(R.id.event_image);
-            event_name = itemView.findViewById(R.id.event_name);
-            event_date = itemView.findViewById(R.id.event_date);
-            event_venue_name = itemView.findViewById(R.id.event_venue_name);
-            event_venue_town = itemView.findViewById(R.id.event_venue_town);
+            iv_event_image = itemView.findViewById(R.id.iv_event_image);
+            tv_event_name = itemView.findViewById(R.id.tv_event_name);
+            tv_event_date = itemView.findViewById(R.id.tv_event_date);
+            tv_ticket_price = itemView.findViewById(R.id.tv_ticket_price);
 
-            ll_parent = itemView.findViewById(R.id.ll_parent);
+            rl_ticket_item_main = itemView.findViewById(R.id.rl_ticket_item_main);
+            rl_ticket_details = itemView.findViewById(R.id.rl_ticket_details);
         }
     }
 

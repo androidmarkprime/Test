@@ -2,6 +2,7 @@ package com.example.markprime.test.Home.MyTickets;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andexert.library.RippleView;
@@ -20,6 +23,7 @@ import com.example.markprime.test.Model.DeliveryObject;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.R;
 import com.example.markprime.test.utils.SharedPrefs;
+import com.github.siyamed.shapeimageview.RoundedImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,10 +43,16 @@ public class MyTicketsFragment extends Fragment {
     private List<EventObject> ticketList = new ArrayList<>();
     private MyTicketsAdapter myTicketsAdapter;
     private FragmentInteractionListener fragmentInteractionListener;
+    private RoundedImageView iv_event_image, iv_qrcode;
+    private RelativeLayout rl_ticket_item_main, rl_ticket_details;
+    private ConstraintLayout cl_parent;
+    private TextView tv_event_name, tv_event_date, tv_barcode, tv_ticket_number,
+            tv_ticket_type, tv_customer_name, tv_ticket_price;
 
     private static final String EVENT_OBJECT = "event_object";
     private EventObject eventObject;
     SharedPrefs sharedPrefs;
+    private boolean showTicket = false;
 
 
     public MyTicketsFragment() {
@@ -83,13 +93,56 @@ public class MyTicketsFragment extends Fragment {
 
         if(ticketList !=null){
             setupRecycler(view);
+
             setAdapter();
+            setViews(view);
         }else{
 
         }
 //        loadTickets();
 
         return view;
+    }
+
+    private void setViews(View view){
+
+        iv_event_image = view.findViewById(R.id.iv_event_image);
+        iv_qrcode = view.findViewById(R.id.iv_qrcode);
+        tv_event_name = view.findViewById(R.id.tv_event_name);
+        tv_event_date = view.findViewById(R.id.tv_event_date);
+        tv_barcode = view.findViewById(R.id.tv_barcode);
+        tv_ticket_number = view.findViewById(R.id.tv_ticket_number);
+        tv_ticket_type = view.findViewById(R.id.tv_ticket_type);
+        tv_customer_name = view.findViewById(R.id.tv_customer_name);
+        tv_ticket_price = view.findViewById(R.id.tv_ticket_price);
+
+        rl_ticket_item_main = view.findViewById(R.id.rl_ticket_item_main);
+        rl_ticket_details = view.findViewById(R.id.rl_ticket_details);
+
+//        cl_parent = view.findViewById(R.id.cl_parent);
+//
+//        cl_parent.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick (View view){
+//                rl_ticket_details.setVisibility(View.VISIBLE);
+//            }
+//        });
+
+//        rl_ticket_item_main.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick (View view){
+//                if(showTicket = false) {
+//                    rl_ticket_details.setVisibility(View.VISIBLE);
+//                    showTicket = true;
+//                }else{
+//                    rl_ticket_details.setVisibility(View.GONE);
+//                    showTicket = false;
+//                }
+//            }
+//        });
+
+
+
     }
 
     private void setAdapter() {
