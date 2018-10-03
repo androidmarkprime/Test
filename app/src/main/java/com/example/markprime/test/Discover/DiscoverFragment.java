@@ -216,66 +216,66 @@ public class DiscoverFragment extends Fragment
 
     @Override
     public void seeMoreClicked(JSONObject fullJsonString, DiscoverSeeMoreListener listener) {
-        fragmentInteractionListener.openSeeMoreFragment(fullJsonString.toString(), listener);
+//        fragmentInteractionListener.openSeeMoreFragment(fullJsonString.toString(), listener);
     }
 
     @Override
     public void singleEventClicked(String eventId) {
-//        fragmentInteractionListener.showLoader();
-        ApiService.getInstance(context).getEventDetails(eventId, new VolleySingletonListener<JSONObject>() {
-            @Override
-            public void onResult(JSONObject object) {
-//                fragmentInteractionListener.dismissLoader();
-                try {
-                    fragmentInteractionListener.setEventProfileFrag(object.getJSONObject(Constants.RESULTS));
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }, new VolleySingletonErrorListener() {
-            @Override
-            public void onErrorResult(VolleyError object) {
-//                fragmentInteractionListener.dismissLoader();
-                if(object.getCause() instanceof UnknownHostException){
-                    handleNoConnectionDialog();
-                }
-            }
-        });
+////        fragmentInteractionListener.showLoader();
+//        ApiService.getInstance(context).getEventDetails(eventId, new VolleySingletonListener<JSONObject>() {
+//            @Override
+//            public void onResult(JSONObject object) {
+////                fragmentInteractionListener.dismissLoader();
+//                try {
+//                    fragmentInteractionListener.setEventProfileFrag(object.getJSONObject(Constants.RESULTS));
+//                } catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new VolleySingletonErrorListener() {
+//            @Override
+//            public void onErrorResult(VolleyError object) {
+////                fragmentInteractionListener.dismissLoader();
+//                if(object.getCause() instanceof UnknownHostException){
+//                    handleNoConnectionDialog();
+//                }
+//            }
+//        });
     }
 
     @Override
     public void inspireMeClicked(JSONObject fullObject) {
-        fragmentInteractionListener.setInspireMeFragment(fullObject);
+//        fragmentInteractionListener.setInspireMeFragment(fullObject);
     }
 
     @Override
     public void goingToSingleEventClicked(final DiscoverObject discoverModel) {
-        try {
-            ApiService.getInstance(context).changeGoingToStatus(buildGoingToJsonObject(
-                    discoverModel.getmInfo().getJSONObject(0).getInt(Constants.GOING_TO),
-                    Integer.parseInt(discoverModel.getmInfo().
-                            getJSONObject(0).getString(Constants.ID))),
-                    new VolleySingletonListener<JSONObject>() {
-                        @Override
-                        public void onResult(JSONObject object) {
-                            try {
-                                handleGoingToToastSuccess(discoverModel.getmInfo().getJSONObject(0).
-                                        getInt(Constants.GOING_TO));
-                            } catch (Exception e){
-                                e.printStackTrace();
-                            }
-                        }
-                    }, new VolleySingletonErrorListener() {
-                        @Override
-                        public void onErrorResult(VolleyError object) {
-                            if(object.getCause() instanceof UnknownHostException){
-                                handleNoConnectionDialog();
-                            }
-                        }
-                    });
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            ApiService.getInstance(context).changeGoingToStatus(buildGoingToJsonObject(
+//                    discoverModel.getmInfo().getJSONObject(0).getInt(Constants.GOING_TO),
+//                    Integer.parseInt(discoverModel.getmInfo().
+//                            getJSONObject(0).getString(Constants.ID))),
+//                    new VolleySingletonListener<JSONObject>() {
+//                        @Override
+//                        public void onResult(JSONObject object) {
+//                            try {
+//                                handleGoingToToastSuccess(discoverModel.getmInfo().getJSONObject(0).
+//                                        getInt(Constants.GOING_TO));
+//                            } catch (Exception e){
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }, new VolleySingletonErrorListener() {
+//                        @Override
+//                        public void onErrorResult(VolleyError object) {
+//                            if(object.getCause() instanceof UnknownHostException){
+//                                handleNoConnectionDialog();
+//                            }
+//                        }
+//                    });
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -298,23 +298,23 @@ public class DiscoverFragment extends Fragment
 
     @Override
     public void goingToClicked(final DiscoverCarouselObject carouselModel) {
-        try {
-            ApiService.getInstance(context).changeGoingToStatus(buildGoingToJsonObject(
-                    carouselModel.getGoingTo(), Integer.parseInt(carouselModel.getmId())),
-                    new VolleySingletonListener<JSONObject>() {
-                        @Override
-                        public void onResult(JSONObject object) {
-                            handleGoingToToastSuccess(carouselModel.getGoingTo());
-                        }
-                    }, new VolleySingletonErrorListener() {
-                        @Override
-                        public void onErrorResult(VolleyError object) {
-                            Toast.makeText(context, "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            ApiService.getInstance(context).changeGoingToStatus(buildGoingToJsonObject(
+//                    carouselModel.getGoingTo(), Integer.parseInt(carouselModel.getmId())),
+//                    new VolleySingletonListener<JSONObject>() {
+//                        @Override
+//                        public void onResult(JSONObject object) {
+//                            handleGoingToToastSuccess(carouselModel.getGoingTo());
+//                        }
+//                    }, new VolleySingletonErrorListener() {
+//                        @Override
+//                        public void onErrorResult(VolleyError object) {
+//                            Toast.makeText(context, "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -323,16 +323,16 @@ public class DiscoverFragment extends Fragment
     }
 
     private JSONObject buildGoingToJsonObject(int goingTo, int eventId){
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put(Constants.ACCESSTOKEN,
-                    BaseActivity.prefs.getString(Constants.ACCESS_TOKEN, ""));
-            jsonObject.put("going", goingTo);
-            jsonObject.put("eventid", eventId);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return jsonObject;
+//        JSONObject jsonObject = new JSONObject();
+//        try {
+//            jsonObject.put(Constants.ACCESSTOKEN,
+//                    BaseActivity.prefs.getString(Constants.ACCESS_TOKEN, ""));
+//            jsonObject.put("going", goingTo);
+//            jsonObject.put("eventid", eventId);
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return jsonObject;
     }
 
     private void handleGoingToToastSuccess(int status){
@@ -347,26 +347,26 @@ public class DiscoverFragment extends Fragment
     }
 
     private void handleCarouselEventClick(DiscoverCarouselObject carouselModel){
-//        fragmentInteractionListener.showLoader();
-        ApiService.getInstance(context).getEventDetails(carouselModel.getmId(), new VolleySingletonListener<JSONObject>() {
-            @Override
-            public void onResult(JSONObject object) {
-//                fragmentInteractionListener.dismissLoader();
-                try {
-                    fragmentInteractionListener.setEventProfileFrag(object.getJSONObject(Constants.RESULTS));
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }, new VolleySingletonErrorListener() {
-            @Override
-            public void onErrorResult(VolleyError object) {
-//                fragmentInteractionListener.dismissLoader();
-                if(object.getCause() instanceof UnknownHostException){
-                    handleNoConnectionDialog();
-                }
-            }
-        });
+////        fragmentInteractionListener.showLoader();
+//        ApiService.getInstance(context).getEventDetails(carouselModel.getmId(), new VolleySingletonListener<JSONObject>() {
+//            @Override
+//            public void onResult(JSONObject object) {
+////                fragmentInteractionListener.dismissLoader();
+//                try {
+//                    fragmentInteractionListener.setEventProfileFrag(object.getJSONObject(Constants.RESULTS));
+//                } catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new VolleySingletonErrorListener() {
+//            @Override
+//            public void onErrorResult(VolleyError object) {
+////                fragmentInteractionListener.dismissLoader();
+//                if(object.getCause() instanceof UnknownHostException){
+//                    handleNoConnectionDialog();
+//                }
+//            }
+//        });
     }
 
     private void handleCarouselLocationClick(DiscoverCarouselObject carouselModel){
@@ -383,18 +383,18 @@ public class DiscoverFragment extends Fragment
     }
 
     private void handleCarouselArtistClick(DiscoverCarouselObject carouselModel){
-        try {
-            fragmentInteractionListener.setArtistFragment(carouselModel.getmName(),
-                    carouselModel.getmImage().getString(Constants.DEFAULT), carouselModel.getmId());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            fragmentInteractionListener.setArtistFragment(carouselModel.getmName(),
+//                    carouselModel.getmImage().getString(Constants.DEFAULT), carouselModel.getmId());
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     private void handleCarouselGenreClicked(DiscoverCarouselObject carouselModel){
-        FilterObject filterObject = new FilterObject();
-        filterObject.setGenres(carouselModel.getmId());
-        fragmentInteractionListener.setViewEventsNoCategory(filterObject, carouselModel.getmName());
+//        FilterObject filterObject = new FilterObject();
+//        filterObject.setGenres(carouselModel.getmId());
+//        fragmentInteractionListener.setViewEventsNoCategory(filterObject, carouselModel.getmName());
     }
 
     private void handleNoConnectionDialog(){

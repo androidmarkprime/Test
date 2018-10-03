@@ -25,7 +25,7 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="drawable_inspire_me_tag"
+                android:background="@drawable/inspire_me_tag"
                 android:orientation="horizontal">
 
                 <LinearLayout

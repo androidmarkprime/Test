@@ -248,21 +248,21 @@
             android:layout_marginStart="16dp"
             android:orientation="vertical">
 
-            <com.skiddle.androidapps.skiddle.customview.TextViewDefaultFont
+            <TextView
                 android:id="@+id/txt_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimary"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textSize="18sp"/>
 
-            <com.skiddle.androidapps.skiddle.customview.TextViewDefaultFont
+            <TextView
                 android:id="@+id/txt_event_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimary"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textSize="14sp"/>
@@ -280,11 +280,11 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="4dp"/>
 
-                <com.skiddle.androidapps.skiddle.customview.TextViewDefaultFont
+                <TextView
                     android:id="@+id/txt_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/skiddle_teal"
+                    android:textColor="@color/Turq"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textSize="12sp"/>
