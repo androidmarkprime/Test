@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class DiscoverAdaptersListener {
 
     interface DiscoverAdapterListener {
-//        void seeMoreClicked(JSONObject fullJsonString, DiscoverSeeMoreListener listener);
+        void seeMoreClicked(JSONObject fullJsonString, DiscoverSeeMoreListener listener);
         void singleEventClicked(String eventId);
         void inspireMeClicked(JSONObject fullObject);
         void goingToSingleEventClicked(DiscoverObject discoverObject);

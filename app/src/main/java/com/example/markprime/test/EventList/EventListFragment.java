@@ -84,7 +84,8 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
     }
 
     private void getEvents() {
-        NetworkManager.getInstance(context).exampleGetRequest("https://www.skiddle.com/api/v1/events/search?api_key=008f1e6099ecc48e990e3776784d447b&platform=android&type=mobileapp&version=97&limit=40&offset=0&description=1&imagefilter=1&platform=android&order=date&radius=30&latitude=53.3994794&longitude=-2.524805&eventcode=4&aggs=genreids,eventcode", new VolleySingletonListener<JSONObject>() {
+        NetworkManager.getInstance(context).exampleGetRequest(
+                "https://www.skiddle.com/api/v1/events/search?api_key=008f1e6099ecc48e990e3776784d447b&platform=android&type=mobileapp&version=97&limit=40&offset=0&description=1&imagefilter=1&platform=android&order=date&radius=30&latitude=53.3994794&longitude=-2.524805&eventcode=4&aggs=genreids,eventcode", new VolleySingletonListener<JSONObject>() {
             @Override
             public void onResult(JSONObject object) {
 
