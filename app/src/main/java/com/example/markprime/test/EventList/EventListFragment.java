@@ -15,13 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.andexert.library.RippleView;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
-import com.example.markprime.test.Network.VolleySingletonErrorListener;
 import com.example.markprime.test.Network.VolleySingletonListener;
 import com.example.markprime.test.R;
 
@@ -30,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class EventListFragment extends Fragment implements EventListAdapterListener {
@@ -101,13 +97,6 @@ public class EventListFragment extends Fragment implements EventListAdapterListe
                 setAdapter();
 
                 Log.d("RESPONSE", object.toString());
-            }
-        }, new VolleySingletonErrorListener() {
-            @Override
-            public void onErrorResult(Exception error) {
-
-
-                Log.d("ERROR", error.getMessage() + " ");
             }
         });
     }

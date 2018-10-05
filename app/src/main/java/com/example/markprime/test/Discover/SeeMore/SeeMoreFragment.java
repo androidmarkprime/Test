@@ -162,37 +162,38 @@ public class SeeMoreFragment extends Fragment
 
                     }
                 });
+    }
 
 
-        @Override
-        public void goingToClicked(final InspireMeEventsObject eventsModel){
-//        discoverSeeMoreListener.updateDiscoverGoingToStatus(eventsModel.getId(), eventsModel.getGoingTo());
-//        try {
-//            JSONObject jsonObject = new JSONObject();
-//            jsonObject.put(Constants.ACCESSTOKEN,
-//                    BaseActivity.prefs.getString(Constants.ACCESS_TOKEN, ""));
-//            jsonObject.put("going", eventsModel.getGoingTo());
-//            jsonObject.put("eventid", eventsModel.getId());
-//            ApiService.getInstance(context).changeGoingToStatus(jsonObject, new VolleySingletonListener<JSONObject>() {
-//                @Override
-//                public void onResult(JSONObject object) {
-//                    handleGoingToToastSuccess(eventsModel.getGoingTo());
-//                }
-//            }, new VolleySingletonErrorListener() {
-//                @Override
-//                public void onErrorResult(VolleyError object) {
-//                    Toast.makeText(context, "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } catch (Exception e){
-//            e.printStackTrace();
+//        @Override
+//        public void goingToClicked(final InspireMeEventsObject eventsModel){
+////        discoverSeeMoreListener.updateDiscoverGoingToStatus(eventsModel.getId(), eventsModel.getGoingTo());
+////        try {
+////            JSONObject jsonObject = new JSONObject();
+////            jsonObject.put(Constants.ACCESSTOKEN,
+////                    BaseActivity.prefs.getString(Constants.ACCESS_TOKEN, ""));
+////            jsonObject.put("going", eventsModel.getGoingTo());
+////            jsonObject.put("eventid", eventsModel.getId());
+////            ApiService.getInstance(context).changeGoingToStatus(jsonObject, new VolleySingletonListener<JSONObject>() {
+////                @Override
+////                public void onResult(JSONObject object) {
+////                    handleGoingToToastSuccess(eventsModel.getGoingTo());
+////                }
+////            }, new VolleySingletonErrorListener() {
+////                @Override
+////                public void onErrorResult(VolleyError object) {
+////                    Toast.makeText(context, "Oops! Something went wrong", Toast.LENGTH_SHORT).show();
+////                }
+////            });
+////        } catch (Exception e){
+////            e.printStackTrace();
+////        }
 //        }
-        }
 
-        public void goingToClickedNoConnection(){
-//        fragmentInteractionListener.showSingleInfoDialog("Oops!",
-//                "Please check your internet connection and try again");
-        }
+//        public void goingToClickedNoConnection(){
+////        fragmentInteractionListener.showSingleInfoDialog("Oops!",
+////                "Please check your internet connection and try again");
+//        }
 
         private void handleGoingToToastSuccess(int status){
             switch (status) {
@@ -207,5 +208,14 @@ public class SeeMoreFragment extends Fragment
                     break;
             }
         }
+
+    @Override
+    public void goingToClicked(InspireMeEventsObject eventsModel) {
+
+    }
+
+    @Override
+    public void goingToClickedNoConnection() {
+
     }
 }

@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.markprime.test.Model.InspireMeEventsObject;
+import com.example.markprime.test.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -55,12 +56,13 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 @Override
 public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         try {
-        RequestOptions requestOptions = new RequestOptions().
-        placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
-        error(getPlaceholder(holder)).centerCrop();
+//        RequestOptions requestOptions = new RequestOptions().
+//        placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
+//        error(getPlaceholder(holder)).centerCrop();
 
-        Picasso.get().load(inspireMeEventsList.get(position).getImage().
-        getString(Constants.DEFAULT)).apply(requestOptions).into(holder.img_main);
+        Picasso.get().load(inspireMeEventsList.get(position).getImage()
+                .getString("default"))
+                .into(holder.img_main);
         } catch (Exception e){
         e.printStackTrace();
         holder.img_main.setImageDrawable(getPlaceholder(holder));
@@ -92,12 +94,12 @@ public void onClick(View v) {
         holder.txt_event_name.setText(Html.fromHtml(inspireMeEventsList.get(position).getName()));
         try {
         holder.txt_event_date.setText(getFormattedDate(inspireMeEventsList.get(position).getDate()));
-        if(inspireMeEventsList.get(position).getVenue().getString(Constants.NAME).toLowerCase().
-        contains(inspireMeEventsList.get(position).getVenue().getString(Constants.TOWN).toLowerCase())){
-        holder.txt_location.setText(inspireMeEventsList.get(position).getVenue().getString(Constants.NAME));
+        if(inspireMeEventsList.get(position).getVenue().getString("name").toLowerCase().
+        contains(inspireMeEventsList.get(position).getVenue().getString("town").toLowerCase())){
+        holder.txt_location.setText(inspireMeEventsList.get(position).getVenue().getString("name"));
         } else {
         holder.txt_location.setText(String.format("%s, %s", inspireMeEventsList.get(position).getVenue().getString(
-        Constants.NAME), inspireMeEventsList.get(position).getVenue().getString(Constants.TOWN)));
+        "name"), inspireMeEventsList.get(position).getVenue().getString("town")));
         }
         } catch (Exception e){
         e.printStackTrace();
@@ -138,17 +140,17 @@ private Drawable getPlaceholder(ViewHolder viewHolder){
         }
 
 private void setGoingToStatus(int status, ViewHolder holder){
-        switch (status){
-        case 0:
-        holder.img_save_event.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_empty_heart));
-        break;
-        case 1:
-        holder.img_save_event.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_going_tick));
-        break;
-        case 9:
-        holder.img_save_event.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_red_heart));
-        break;
-        }
+//        switch (status){
+//        case 0:
+//        holder.img_save_event.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_empty_heart));
+//        break;
+//        case 1:
+//        holder.img_save_event.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_going_tick));
+//        break;
+//        case 9:
+//        holder.img_save_event.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_red_heart));
+//        break;
+//        }
         }
 
 public List<InspireMeEventsObject> getInspireMeEventsList(){
@@ -282,32 +284,32 @@ class ViewHolder extends RecyclerView.ViewHolder {
 
     private void setTagAfter(TextView textView, LinearLayout linearLayout, ImageView imageView,
                              JSONObject object) throws Exception{
-        switch (object.getString(SyncStateContract.Constants.TYPE)){
-            case SyncStateContract.Constants.FEATURED:
-                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_featured));
-                textView.setText("Featured");
-                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_featured));
-                linearLayout.setAlpha(0.9f);
-                break;
-            case Constants.CHOSEN:
-                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_chosen_for_you));
-                textView.setText("Chosen For You");
-                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_chosen_for_you));
-                linearLayout.setAlpha(0.9f);
-                break;
-            case Constants.POPULAR:
-                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_popular));
-                textView.setText("Popular: " + object.getString(Constants.DETAIL) + " going");
-                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
-                linearLayout.setAlpha(0.9f);
-                break;
-            case Constants.INSPIRE_ME:
-                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_inspire_me));
-                textView.setText("Inspire Me");
-                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
-                linearLayout.setAlpha(0.9f);
-                break;
-        }
+//        switch (object.getString(SyncStateContract.Constants.TYPE)){
+//            case SyncStateContract.Constants.FEATURED:
+//                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_featured));
+//                textView.setText("Featured");
+//                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_featured));
+//                linearLayout.setAlpha(0.9f);
+//                break;
+//            case Constants.CHOSEN:
+//                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_chosen_for_you));
+//                textView.setText("Chosen For You");
+//                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_chosen_for_you));
+//                linearLayout.setAlpha(0.9f);
+//                break;
+//            case Constants.POPULAR:
+//                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_popular));
+//                textView.setText("Popular: " + object.getString(Constants.DETAIL) + " going");
+//                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
+//                linearLayout.setAlpha(0.9f);
+//                break;
+//            case Constants.INSPIRE_ME:
+//                imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_inspire_me));
+//                textView.setText("Inspire Me");
+//                linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
+//                linearLayout.setAlpha(0.9f);
+//                break;
+//        }
     }
 
     private boolean checkConnectionAvailable(){

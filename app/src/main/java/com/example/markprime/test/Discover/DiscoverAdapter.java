@@ -24,7 +24,6 @@ import com.example.markprime.test.Model.DiscoverObject;
 import com.example.markprime.test.R;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -32,8 +31,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static android.support.v4.util.Preconditions.checkArgument;
 
 public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -72,8 +69,8 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 return new InspireMeViewHolder(inflater.inflate(R.layout.item_discover_inspire,
                         parent, false));
             case TYPE_SINGLE_EVENT:
-        return new SingleEvent(inflater.inflate(R.layout.item_discover_single_event,
-        parent, false));
+                return new SingleEvent(inflater.inflate(R.layout.item_discover_single_event,
+                        parent, false));
         }
         return null;
     }
@@ -139,21 +136,21 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 adapter = new DiscoverCarouselAdapter(carouselModelList, context, new DiscoverAdaptersListener.DiscoverCarouselListener() {
                     @Override
                     public void carouselItemClicked(DiscoverCarouselObject carouselModel) {
-                        Answers.getInstance().logCustom(new CustomEvent(
-                                "Select from carousel").
-                                putCustomAttribute("Type", getCarouselType()));
-                        carouselListener.carouselItemClicked(carouselModel);
+//                        Answers.getInstance().logCustom(new CustomEvent(
+//                                "Select from carousel").
+//                                putCustomAttribute("Type", getCarouselType()));
+//                        carouselListener.carouselItemClicked(carouselModel);
                     }
 
                     @Override
                     public void goingToClicked(DiscoverCarouselObject carouselModel) {
                         try {
-                            for (int i = 0; i < content.getmFullObject().getJSONArray(Constants.INFO).length(); i++) {
+                            for (int i = 0; i < content.getmFullObject().getJSONArray("info").length(); i++) {
                                 if (carouselModel.getmId().equalsIgnoreCase(content.getmFullObject().
-                                        getJSONArray(Constants.INFO).getJSONObject(i).
-                                        getString(Constants.ID))) {
+                                        getJSONArray("info").getJSONObject(i).
+                                        getString("id"))) {
                                     content.getmFullObject().
-                                            getJSONArray(Constants.INFO).getJSONObject(i).put(Constants.GOING_TO, carouselModel.getGoingTo());
+                                            getJSONArray("info").getJSONObject(i).put("goingto", carouselModel.getGoingTo());
                                     break;
                                 }
                             }
@@ -173,9 +170,9 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 btn_see_more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Answers.getInstance().logCustom(new CustomEvent(
-                                "See more carousel").
-                                putCustomAttribute("Type", getCarouselType()));
+//                        Answers.getInstance().logCustom(new CustomEvent(
+//                                "See more carousel").
+//                                putCustomAttribute("Type", getCarouselType()));
                         discoverAdapterListener.seeMoreClicked(discoverObjectList.
                                 get(position).getmFullObject(), new DiscoverSeeMoreListener() {
                             @Override
@@ -196,10 +193,10 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                                         notifyDataSetChanged();
                                         try {
                                             if (ID.equalsIgnoreCase(content.getmFullObject().
-                                                    getJSONArray(Constants.INFO).getJSONObject(i).
-                                                    getString(Constants.ID))) {
+                                                    getJSONArray("info").getJSONObject(i).
+                                                    getString("id"))) {
                                                 content.getmFullObject().
-                                                        getJSONArray(Constants.INFO).getJSONObject(i).put(Constants.GOING_TO, goingTo);
+                                                        getJSONArray("info").getJSONObject(i).put("goingto", goingTo);
                                                 break;
                                             }
                                         } catch (Exception e) {
@@ -223,7 +220,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         private boolean checkAllLocations() {
             for (int i = 0; i < carouselModelList.size(); i++) {
-                if (!carouselModelList.get(i).getmType().equals(Constants.CITY)) {
+                if (!carouselModelList.get(i).getmType().equals("city")) {
                     return false;
                 }
             }
@@ -291,7 +288,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             ll_container.setAlpha(0.9f);
             ll_container.bringToFront();
             try {
-                Picasso.get().load(content.getImage().getString(Constants.DEFAULT)).into(img_main);
+                Picasso.get().load(content.getImage().getString("default")).into(img_main);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -299,8 +296,8 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 @Override
                 public void onClick(View v) {
                     discoverAdapterListener.inspireMeClicked(content.getmFullObject());
-                    Answers.getInstance().logCustom(new CustomEvent("Select Inspire me").
-                            putCustomAttribute("Name", content.getmTitle()));
+//                    Answers.getInstance().logCustom(new CustomEvent("Select Inspire me").
+//                            putCustomAttribute("Name", content.getmTitle()));
                 }
             });
 
@@ -360,7 +357,7 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             super.setContent(content, position);
             try {
                 Picasso.get().load(content.getmInfo().getJSONObject(0).
-                        getJSONObject(Constants.IMAGE).getString(Constants.DEFAULT)).into(img_main);
+                        getJSONObject("image").getString("default")).into(img_main);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -369,11 +366,11 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 @Override
                 public void onClick(View v) {
                     try {
-                        Answers.getInstance().logCustom(new CustomEvent("Select single event").
-                                putCustomAttribute("ID", content.getmInfo().getJSONObject(0).
-                                        getString(Constants.ID)));
+//                        Answers.getInstance().logCustom(new CustomEvent("Select single event").
+//                                putCustomAttribute("ID", content.getmInfo().getJSONObject(0).
+//                                        getString("id")));
                         discoverAdapterListener.singleEventClicked(content.getmInfo().
-                                getJSONObject(0).getString(Constants.ID));
+                                getJSONObject(0).getString("id"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -382,13 +379,13 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             try {
                 if (content.getmInfo().getJSONObject(0).
-                        getString(Constants.HEADER_HEX) != null && !content.getmInfo().getJSONObject(0).
-                        getString(Constants.HEADER_HEX).equals("")) {
+                        getString("headerhex") != null && !content.getmInfo().getJSONObject(0).
+                        getString("headerhex").equals("")) {
 
                     GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                             new int[]{Color.TRANSPARENT, alterColor(Color.parseColor(
                                     content.getmInfo().getJSONObject(0).
-                                            getString(Constants.HEADER_HEX)), 0.2f)});
+                                            getString("headerhex")), 0.2f)});
                     gd.setCornerRadius(0f);
 
                     gradient_view.setBackground(gd);
@@ -401,12 +398,12 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             try {
                 txt_event_name.setText(Html.fromHtml(content.getmInfo().getJSONObject(
-                        0).getString(Constants.NAME)));
+                        0).getString("name")));
                 txt_event_date.setText(getFormattedDate(content.getmInfo().
-                        getJSONObject(0).getString(Constants.DATE)));
+                        getJSONObject(0).getString("date")));
                 txt_location.setText(String.format("%s, %s", content.getmInfo().getJSONObject(
-                        0).getJSONObject(Constants.VENUE).getString(Constants.NAME), content.getmInfo().getJSONObject(0).getJSONObject(Constants.VENUE).
-                        getString(Constants.TOWN)));
+                        0).getJSONObject("venue").getString("name"), content.getmInfo().getJSONObject(0).getJSONObject("venue").
+                        getString("town")));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -419,15 +416,15 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 public void onClick(View v) {
                     if (checkConnectionAvailable()) {
                         try {
-                            switch (content.getmInfo().getJSONObject(0).getInt(Constants.GOING_TO)) {
+                            switch (content.getmInfo().getJSONObject(0).getInt("goingto")) {
                                 case 0:
-                                    content.getmInfo().getJSONObject(0).put(Constants.GOING_TO, 9);
+                                    content.getmInfo().getJSONObject(0).put("goingto", 9);
                                     break;
                                 case 1:
-                                    content.getmInfo().getJSONObject(0).put(Constants.GOING_TO, 0);
+                                    content.getmInfo().getJSONObject(0).put("goingto", 0);
                                     break;
                                 case 9:
-                                    content.getmInfo().getJSONObject(0).put(Constants.GOING_TO, 1);
+                                    content.getmInfo().getJSONObject(0).put("goingto", 1);
                                     break;
                             }
                             notifyDataSetChanged();
@@ -443,136 +440,137 @@ public class DiscoverAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
 
         private void sortTags(DiscoverObject content) {
-            try {
-                JSONArray jsonArray = content.getmInfo().getJSONObject(0).getJSONArray(Constants.TAGS);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    if (i == 0) {
-                        setTagAfter(txt_tag_one, ll_first_tag, img_tag_one, jsonArray.getJSONObject(i));
-                    } else if (i == 1) {
-                        setTagAfter(txt_tag_two, ll_second_tag, img_tag_two, jsonArray.getJSONObject(i));
-                    } else if (i == 2) {
-                        setTagAfter(txt_tag_three, ll_third_tag, img_tag_three, jsonArray.getJSONObject(i));
-                    } else if (i == 3) {
-                        setTagAfter(txt_tag_four, ll_fourth_tag, img_tag_four, jsonArray.getJSONObject(i));
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                JSONArray jsonArray = content.getmInfo().getJSONObject(0).getJSONArray("tags");
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    if (i == 0) {
+//                        setTagAfter(txt_tag_one, ll_first_tag, img_tag_one, jsonArray.getJSONObject(i));
+//                    } else if (i == 1) {
+//                        setTagAfter(txt_tag_two, ll_second_tag, img_tag_two, jsonArray.getJSONObject(i));
+//                    } else if (i == 2) {
+//                        setTagAfter(txt_tag_three, ll_third_tag, img_tag_three, jsonArray.getJSONObject(i));
+//                    } else if (i == 3) {
+//                        setTagAfter(txt_tag_four, ll_fourth_tag, img_tag_four, jsonArray.getJSONObject(i));
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
 
         private void setTagAfter(TextView textView, LinearLayout linearLayout, ImageView imageView,
                                  JSONObject object) throws Exception {
-            switch (object.getString(Constants.TYPE)) {
-                case Constants.FEATURED:
-                    textView.setText("Featured");
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_featured));
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_featured));
-                    linearLayout.setAlpha(0.9f);
-                    textView.bringToFront();
-                    break;
-                case Constants.CHOSEN:
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_chosen_for_you));
-                    textView.setText("Chosen For You");
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_chosen_for_you));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-                case Constants.POPULAR:
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_popular));
-                    textView.setText("Popular: " + object.getString(Constants.DETAIL) + " going");
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-                case Constants.INSPIRE_ME:
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_inspire_me));
-                    textView.setText("Inspire Me");
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-            }
+//            switch (object.getString("type")) {
+//                case Constants.FEATURED:
+//                    textView.setText("Featured");
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_featured));
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_featured));
+//                    linearLayout.setAlpha(0.9f);
+//                    textView.bringToFront();
+//                    break;
+//                case Constants.CHOSEN:
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_chosen_for_you));
+//                    textView.setText("Chosen For You");
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_chosen_for_you));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//                case Constants.POPULAR:
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_popular));
+//                    textView.setText("Popular: " + object.getString(Constants.DETAIL) + " going");
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//                case Constants.INSPIRE_ME:
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_inspire_me));
+//                    textView.setText("Inspire Me");
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//            }
         }
 
         private void handleStatus(DiscoverObject content) {
-            try {
-                switch (content.getmInfo().getJSONObject(0).getInt(Constants.GOING_TO)) {
-                    case 0:
-                        img_save_event.setImageDrawable(context.getResources().
-                                getDrawable(R.drawable.icn_empty_heart));
-                        break;
-                    case 1:
-                        img_save_event.setImageDrawable(context.getResources().
-                                getDrawable(R.drawable.icn_going_tick));
-                        break;
-                    case 9:
-                        img_save_event.setImageDrawable(context.getResources().
-                                getDrawable(R.drawable.icn_red_heart));
-                        break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                switch (content.getmInfo().getJSONObject(0).getInt("goingto")) {
+//                    case 0:
+//                        img_save_event.setImageDrawable(context.getResources().
+//                                getDrawable(R.drawable.icn_empty_heart));
+//                        break;
+//                    case 1:
+//                        img_save_event.setImageDrawable(context.getResources().
+//                                getDrawable(R.drawable.icn_going_tick));
+//                        break;
+//                    case 9:
+//                        img_save_event.setImageDrawable(context.getResources().
+//                                getDrawable(R.drawable.icn_red_heart));
+//                        break;
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+
         }
 
-    }
-
-    private int alterColor(int color, float factor) {
+        private int alterColor(int color, float factor) {
         int a = (color & (0xFF << 24)) >> 24;
         int r = (int) (((color & (0xFF << 16)) >> 16) * factor);
         int g = (int) (((color & (0xFF << 8)) >> 8) * factor);
         int b = (int) ((color & 0xFF) * factor);
         return Color.argb(a, r, g, b);
-    }
+        }
 
-    private String getFormattedDate(String dateString) throws Exception {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-        Date newDate = format.parse(dateString);
-        format = new SimpleDateFormat("EEEE d MMMM YYYY", Locale.UK);
+        private String getFormattedDate(String dateString) throws Exception {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+            Date newDate = format.parse(dateString);
+            format = new SimpleDateFormat("EEEE d MMMM YYYY", Locale.UK);
 
-        String[] splitDate = format.format(newDate).split(" ");
-        for (int i = 0; i < splitDate.length; i++) {
-            try {
-                int dateNumber = Integer.parseInt(splitDate[i]);
-                splitDate[i] = splitDate[i] + getDayOfMonthSuffix(dateNumber);
-                break;
-            } catch (Exception e) {
-                e.printStackTrace();
+            String[] splitDate = format.format(newDate).split(" ");
+            for (int i = 0; i < splitDate.length; i++) {
+                try {
+                    int dateNumber = Integer.parseInt(splitDate[i]);
+//                    splitDate[i] = splitDate[i] + getDayOfMonthSuffix(dateNumber);
+                    break;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
+            return buildFullDateFromArray(splitDate);
         }
 
-        return buildFullDateFromArray(splitDate);
-    }
+        private String buildFullDateFromArray(String[] splitDate) {
+            String completeDate = "";
 
-    private String buildFullDateFromArray(String[] splitDate) {
-        String completeDate = "";
+            for (int i = 0; i < splitDate.length; i++) {
+                completeDate = completeDate + " " + splitDate[i];
+            }
 
-        for (int i = 0; i < splitDate.length; i++) {
-            completeDate = completeDate + " " + splitDate[i];
+            return completeDate.trim();
         }
 
-        return completeDate.trim();
-    }
+//        private String getDayOfMonthSuffix(final int n) {
+//            checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n);
+//            if (n >= 11 && n <= 13) {
+//                return "th";
+//            }
+//            switch (n % 10) {
+//                case 1:
+//                    return "st";
+//                case 2:
+//                    return "nd";
+//                case 3:
+//                    return "rd";
+//                default:
+//                    return "th";
+//            }
+//        }
 
-    private String getDayOfMonthSuffix(final int n) {
-        checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n);
-        if (n >= 11 && n <= 13) {
-            return "th";
+        private boolean checkConnectionAvailable() {
+            ConnectivityManager connectivityManager
+                    = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null;
         }
-        switch (n % 10) {
-            case 1:
-                return "st";
-            case 2:
-                return "nd";
-            case 3:
-                return "rd";
-            default:
-                return "th";
-        }
-    }
-
-    private boolean checkConnectionAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null;
     }
 }

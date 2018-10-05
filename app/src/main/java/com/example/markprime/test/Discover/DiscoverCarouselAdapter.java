@@ -1,20 +1,14 @@
 package com.example.markprime.test.Discover;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.markprime.test.Model.DiscoverCarouselObject;
+import com.example.markprime.test.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -29,7 +24,6 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -59,13 +53,13 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
 
         switch (viewType) {
             case TYPE_CITY:
-                return new LocationViewHolder(inflater.inflate(R.layout.carousel_item, parent, false));
+                return new LocationViewHolder(inflater.inflate(R.layout.item_carousel, parent, false));
             case TYPE_ARTIST:
-                return new ArtistViewHolder(inflater.inflate(R.layout.carousel_item, parent, false));
+                return new ArtistViewHolder(inflater.inflate(R.layout.item_carousel, parent, false));
             case TYPE_GENRE:
-                return new GenreViewHolder(inflater.inflate(R.layout.carousel_item, parent, false));
+                return new GenreViewHolder(inflater.inflate(R.layout.item_carousel, parent, false));
             case TYPE_EVENT:
-                return new EventViewHolder(inflater.inflate(R.layout.carousel_item, parent, false));
+                return new EventViewHolder(inflater.inflate(R.layout.item_carousel, parent, false));
         }
 
         return null;
@@ -123,60 +117,60 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
         holder.view_gradient.requestLayout();
     }
 
-    private void setGoingToInfo(ViewHolder holder, DiscoverCarouselObject carouselModel) {
-        switch (carouselModel.getGoingTo()) {
-            case 0:
-                holder.img_going_to.setImageDrawable(context.getResources().
-                        getDrawable(R.drawable.icn_empty_heart));
-                break;
-            case 1:
-                holder.img_going_to.setImageDrawable(context.getResources().
-                        getDrawable(R.drawable.icn_going_tick));
-                break;
-            case 9:
-                holder.img_going_to.setImageDrawable(context.getResources().
-                        getDrawable(R.drawable.icn_red_heart));
-                break;
-        }
-    }
+//    private void setGoingToInfo(ViewHolder holder, DiscoverCarouselObject carouselModel) {
+//        switch (carouselModel.getGoingTo()) {
+//            case 0:
+//                holder.img_going_to.setImageDrawable(context.getResources().
+//                        getDrawable(R.drawable.icn_empty_heart));
+//                break;
+//            case 1:
+//                holder.img_going_to.setImageDrawable(context.getResources().
+//                        getDrawable(R.drawable.icn_going_tick));
+//                break;
+//            case 9:
+//                holder.img_going_to.setImageDrawable(context.getResources().
+//                        getDrawable(R.drawable.icn_red_heart));
+//                break;
+//        }
+//    }
 
     private void setTagsTextAnBackground(JSONObject object, TextView textView, ImageView imageView,
                                          LinearLayout linearLayout) {
-        try {
-            switch (object.getString(Constants.TYPE)) {
-                case Constants.FEATURED:
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_featured));
-                    textView.setVisibility(View.GONE);
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_featured));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-                case Constants.CHOSEN:
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_chosen_for_you));
-                    textView.setVisibility(View.GONE);
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_chosen_for_you));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-                case Constants.POPULAR:
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
-                    if (Integer.parseInt(object.getString(Constants.DETAIL)) > 1000) {
-                        textView.setText(divideDetailByThousand(object.getString(Constants.DETAIL)));
-                    } else {
-                        textView.setText(object.getString(Constants.DETAIL));
-                    }
-                    textView.setVisibility(View.VISIBLE);
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_popular));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-                case Constants.INSPIRE_ME:
-                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
-                    textView.setVisibility(View.GONE);
-                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_inspire_me));
-                    linearLayout.setAlpha(0.9f);
-                    break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            switch (object.getString(Constants.TYPE)) {
+//                case Constants.FEATURED:
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_featured));
+//                    textView.setVisibility(View.GONE);
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_featured));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//                case Constants.CHOSEN:
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_chosen_for_you));
+//                    textView.setVisibility(View.GONE);
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_chosen_for_you));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//                case Constants.POPULAR:
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
+//                    if (Integer.parseInt(object.getString(Constants.DETAIL)) > 1000) {
+//                        textView.setText(divideDetailByThousand(object.getString(Constants.DETAIL)));
+//                    } else {
+//                        textView.setText(object.getString(Constants.DETAIL));
+//                    }
+//                    textView.setVisibility(View.VISIBLE);
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_popular));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//                case Constants.INSPIRE_ME:
+//                    linearLayout.setBackground(context.getResources().getDrawable(R.drawable.tag_inspire_me));
+//                    textView.setVisibility(View.GONE);
+//                    imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.icn_inspire_me));
+//                    linearLayout.setAlpha(0.9f);
+//                    break;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private String divideDetailByThousand(String detail) {
@@ -283,7 +277,7 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
         for (int i = 0; i < splitDate.length; i++) {
             try {
                 int dateNumber = Integer.parseInt(splitDate[i]);
-                splitDate[i] = splitDate[i] + getDayOfMonthSuffix(dateNumber);
+//                splitDate[i] = splitDate[i] + getDayOfMonthSuffix(dateNumber);
                 break;
             } catch (Exception e) {
             }
@@ -302,22 +296,22 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
         return completeDate.trim();
     }
 
-    private String getDayOfMonthSuffix(final int n) {
-        checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n);
-        if (n >= 11 && n <= 13) {
-            return "th";
-        }
-        switch (n % 10) {
-            case 1:
-                return "st";
-            case 2:
-                return "nd";
-            case 3:
-                return "rd";
-            default:
-                return "th";
-        }
-    }
+//    private String getDayOfMonthSuffix(final int n) {
+//        checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n);
+//        if (n >= 11 && n <= 13) {
+//            return "th";
+//        }
+//        switch (n % 10) {
+//            case 1:
+//                return "st";
+//            case 2:
+//                return "nd";
+//            case 3:
+//                return "rd";
+//            default:
+//                return "th";
+//        }
+//    }
 
     public float pxFromDp(final Context context, final float dp) {
         return dp * context.getResources().getDisplayMetrics().density;
@@ -382,9 +376,9 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
 
             try {
                 Picasso.get().load(content.getmImage().
-                        getString(Constants.DEFAULT)).into(img_event_image);
+                        getString("default")).into(img_event_image);
                 txt_date.setText(getFormattedShortDate(content.getmDate()));
-                txt_location.setText(carouselList.get(position).getmVenue().getString(Constants.TOWN));
+                txt_location.setText(carouselList.get(position).getmVenue().getString("town"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -489,15 +483,16 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
 
             setCarouselItemWidth(210);
 
-            RequestOptions requestOptions = new RequestOptions().
-                    placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
-                    error(R.drawable.ic_skiddle_placeholder).centerCrop();
+//            RequestOptions requestOptions = new RequestOptions().
+//                    placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
+//                    error(R.drawable.ic_skiddle_placeholder).centerCrop();
 
             try {
-                Picasso.get().load(content.getmImage().
-                        getString(Constants.DEFAULT)).apply(requestOptions).into(img_event_image);
+                Picasso.get().load(content.getmImage()
+                        .getString("default"))
+                        .into(img_event_image);
                 txt_date.setText(getFormattedShortDate(content.getmDate()));
-                txt_location.setText(carouselList.get(position).getmVenue().getString(Constants.TOWN));
+                txt_location.setText(carouselList.get(position).getmVenue().getString("town"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -589,15 +584,17 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
             txt_event_name.setText(Html.fromHtml(content.getmName()));
             ll_tags.bringToFront();
 
-            RequestOptions requestOptions = new RequestOptions().
-                    placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
-                    error(R.drawable.ic_skiddle_placeholder).centerCrop();
+//            RequestOptions requestOptions = new RequestOptions().
+//                    placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
+//                    error(R.drawable.ic_skiddle_placeholder).centerCrop();
 
             try {
-                Picasso.get().load(content.getmImage().
-                        getString(Constants.DEFAULT)).apply(requestOptions).into(img_event_image);
+                Picasso.get()
+                        .load(content.getmImage()
+                        .getString("default"))
+                        .into(img_event_image);
                 txt_date.setText(getFormattedShortDate(content.getmDate()));
-                txt_location.setText(carouselList.get(position).getmVenue().getString(Constants.TOWN));
+                txt_location.setText(carouselList.get(position).getmVenue().getString("town"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -688,15 +685,16 @@ public class DiscoverCarouselAdapter extends RecyclerView.Adapter<BaseViewHolder
                 setTags(carouselList.get(position).getTags());
             }
 
-            RequestOptions requestOptions = new RequestOptions().
-                    placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
-                    error(R.drawable.ic_skiddle_placeholder).centerCrop();
+//            RequestOptions requestOptions = new RequestOptions().
+//                    placeholder(context.getResources().getDrawable(R.drawable.ic_skiddle_placeholder)).
+//                    error(R.drawable.ic_skiddle_placeholder).centerCrop();
 
             try {
-                Picasso.get().load(content.getmImage().
-                        getString(SyncStateContract.Constants.DEFAULT)).apply(requestOptions).into(img_event_image);
+                Picasso.get().load(content.getmImage()
+                        .getString("default"))
+                        .into(img_event_image);
                 txt_date.setText(getFormattedShortDate(content.getmDate()));
-                txt_location.setText(carouselList.get(position).getmVenue().getString(SyncStateContract.Constants.TOWN));
+                txt_location.setText(carouselList.get(position).getmVenue().getString("town"));
             } catch (Exception e) {
                 e.printStackTrace();
             }

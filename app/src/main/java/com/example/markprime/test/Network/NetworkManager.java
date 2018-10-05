@@ -1,12 +1,9 @@
 package com.example.markprime.test.Network;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -42,7 +39,7 @@ public class NetworkManager {
     }
 
     //This method can be adapted to be used however needed for example swapping GET for POST, supplying a json object as the body instead of an empty new JsonObject();
-    public void exampleGetRequest(String URL, final VolleySingletonListener<JSONObject> listener, final VolleySingletonErrorListener errorListener) {
+    public void exampleGetRequest(String URL, final VolleySingletonListener<JSONObject> listener) {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL, new JSONObject(), new com.android.volley.Response.Listener<JSONObject>() {
             @Override
@@ -52,7 +49,7 @@ public class NetworkManager {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                errorListener.onErrorResult(error);
+//                errorListener.onErrorResult(error);
             }
         });
 

@@ -1,24 +1,14 @@
 package com.example.markprime.test.Discover;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,7 +39,7 @@ public class BaseActivity extends FragmentActivity {
     public void startActivity(Class newClass){
         Intent intent = new Intent(getApplicationContext(), newClass);
         startActivity(intent);
-        overridePendingTransition(R.anim.fadein, R.anim.fade_out);
+//        overridePendingTransition(R.anim.fadein, R.anim.fade_out);
         finish();
     }
 
@@ -57,7 +47,7 @@ public class BaseActivity extends FragmentActivity {
         Intent intent = new Intent(getApplicationContext(), newClass);
         intent.putExtra(extraKey, extraValue);
         startActivity(intent);
-        overridePendingTransition(R.anim.fadein, R.anim.fade_out);
+//        overridePendingTransition(R.anim.fadein, R.anim.fade_out);
         finish();
     }
 

@@ -16,43 +16,43 @@ public class DiscoverCarouselObject {
     public DiscoverCarouselObject(JSONObject object){
         try {
             Log.d("OBJ", object.toString());
-            this.mType = object.getString(Constants.TYPE);
-            if(object.has(Constants.ID)){
-                this.mId = object.getString(Constants.ID);
+            this.mType = object.getString("type");
+            if(object.has("id")){
+                this.mId = object.getString("id");
             }
-            if(object.has(Constants.NAME)){
-                this.mName = object.getString(Constants.NAME);
+            if(object.has("name")){
+                this.mName = object.getString("name");
             }
-            if(object.has(Constants.INTRO)){
-                this.mIntro = object.getString(Constants.INTRO);
+            if(object.has("intro")){
+                this.mIntro = object.getString("intro");
             }
-            this.mImage = object.getJSONObject(Constants.IMAGE);
-            if(object.has(Constants.VENUE)){
-                this.mVenue = object.getJSONObject(Constants.VENUE);
+            this.mImage = object.getJSONObject("image");
+            if(object.has("venue")){
+                this.mVenue = object.getJSONObject("venue");
             }
-            if(object.has(Constants.DATE)){
-                this.mDate = object.getString(Constants.DATE);
+            if(object.has("date")){
+                this.mDate = object.getString("date");
             }
-            if(object.has(Constants.LOCATION)){
-                this.mLocation = object.getJSONObject(Constants.LOCATION);
+            if(object.has("location")){
+                this.mLocation = object.getJSONObject("location");
             }
-            if(object.has(Constants.TAGS)){
-                this.tags = object.getJSONArray(Constants.TAGS);
+            if(object.has("tags")){
+                this.tags = object.getJSONArray("tags");
             }
-            if(object.has(Constants.GOING_TO)){
-                this.goingTo = object.getInt(Constants.GOING_TO);
+            if(object.has("goingto")){
+                this.goingTo = object.getInt("goingto");
             }
-            if(object.has(Constants.LISTING_ID_LOWER_CASE)){
-                this.listingId = object.getString(Constants.LISTING_ID_LOWER_CASE);
+            if(object.has("listings_id_lower_case")){
+                this.listingId = object.getString("listings_id_lower_case");
             }
-            if(object.has(Constants.STATS)){
-                this.stats = object.getJSONArray(Constants.STATS);
+            if(object.has("stats")){
+                this.stats = object.getJSONArray("stats");
             }
-            if(object.has(Constants.POINTS)){
-                this.mPoints = object.getInt(Constants.POINTS);
+            if(object.has("points")){
+                this.mPoints = object.getInt("points");
             }
-            if(object.has(Constants.URL)){
-                this.mUrl = object.getString(Constants.URL);
+            if(object.has("url")){
+                this.mUrl = object.getString("url");
             }
         } catch (Exception e){
             e.printStackTrace();

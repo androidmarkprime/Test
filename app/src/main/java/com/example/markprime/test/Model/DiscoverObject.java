@@ -15,26 +15,26 @@ public class DiscoverObject {
         Log.d("OBJECT", object.toString());
         try {
             this.mFullObject = object;
-            if(object.has(Constants.TYPE)){
-                this.mType = object.getString(Constants.TYPE);
+            if(object.has("type")){
+                this.mType = object.getString("type");
             }
-            if(object.has(Constants.TITLE)){
-                this.mTitle = object.getString(Constants.TITLE);
+            if(object.has("title")){
+                this.mTitle = object.getString("title");
             }
-            if(object.has(Constants.INTRO)){
-                this.mIntro = object.getString(Constants.INTRO);
+            if(object.has("intro")){
+                this.mIntro = object.getString("intro");
             }
-            if(object.has(Constants.URL)){
-                this.mUrl = object.getString(Constants.URL);
+            if(object.has("url")){
+                this.mUrl = object.getString("url");
             }
-            if(object.has(Constants.URL_TITLE)){
-                this.mUrlTitle = object.getString(Constants.URL_TITLE);
+            if(object.has("url_title")){
+                this.mUrlTitle = object.getString("url_title");
             }
-            if(object.has(Constants.INFO)){
-                this.mInfo = object.getJSONArray(Constants.INFO);
+            if(object.has("info")){
+                this.mInfo = object.getJSONArray("info");
             }
-            if(object.has(Constants.IMAGE)){
-                this.image = object.getJSONObject(Constants.IMAGE);
+            if(object.has("image")){
+                this.image = object.getJSONObject("image");
             }
         } catch (Exception e){
             e.printStackTrace();

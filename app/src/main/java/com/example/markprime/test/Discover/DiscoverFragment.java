@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,21 +19,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.DiscoverCarouselObject;
 import com.example.markprime.test.Model.DiscoverObject;
 import com.example.markprime.test.Network.NetworkManager;
-import com.example.markprime.test.Network.VolleySingletonErrorListener;
 import com.example.markprime.test.Network.VolleySingletonListener;
-import com.example.markprime.test.Service.ApiService;
+import com.example.markprime.test.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,7 +154,6 @@ public class DiscoverFragment extends Fragment
 
                         if (discoverLoaded = false) {
                             txt_no_items_available.setVisibility(View.GONE);
-                            discoverLoaded();
                             handleNetworkCallSuccessResponse(object);
                             setSwipeRefreshNotRefreshing();
 
@@ -167,11 +161,6 @@ public class DiscoverFragment extends Fragment
                             re_discover.setAdapter(discoverAdapter);
                             swipe_refresh.setRefreshing(false);
                         }
-                    }
-
-
-                    public boolean discoverLoaded() {
-                        discoverLoaded = true;
                     }
 
                     private void setSwipeRefreshNotRefreshing() {
@@ -199,6 +188,7 @@ public class DiscoverFragment extends Fragment
 //        re_discover.setAdapter(discoverAdapter);
                     }
                 });
+        discoverLoaded = true;
     }
 
 
@@ -319,21 +309,21 @@ public class DiscoverFragment extends Fragment
 
     @Override
     public void goingToNoConnection() {
-        handleNoConnectionDialog();
+//        handleNoConnectionDialog();
     }
 
-    private JSONObject buildGoingToJsonObject(int goingTo, int eventId){
-//        JSONObject jsonObject = new JSONObject();
-//        try {
-//            jsonObject.put(Constants.ACCESSTOKEN,
-//                    BaseActivity.prefs.getString(Constants.ACCESS_TOKEN, ""));
-//            jsonObject.put("going", goingTo);
-//            jsonObject.put("eventid", eventId);
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return jsonObject;
-    }
+//    private JSONObject buildGoingToJsonObject(int goingTo, int eventId){
+////        JSONObject jsonObject = new JSONObject();
+////        try {
+////            jsonObject.put(Constants.ACCESSTOKEN,
+////                    BaseActivity.prefs.getString(Constants.ACCESS_TOKEN, ""));
+////            jsonObject.put("going", goingTo);
+////            jsonObject.put("eventid", eventId);
+////        } catch (Exception e){
+////            e.printStackTrace();
+////        }
+////        return jsonObject;
+//    }
 
     private void handleGoingToToastSuccess(int status){
 //        switch (status){

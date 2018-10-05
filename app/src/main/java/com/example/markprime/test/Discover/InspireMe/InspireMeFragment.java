@@ -16,6 +16,7 @@ import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.InspireMeEventsObject;
 import com.example.markprime.test.Network.NetworkManager;
 import com.example.markprime.test.Network.VolleySingletonListener;
+import com.example.markprime.test.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

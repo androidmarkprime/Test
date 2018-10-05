@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Model.EventObject;
 import com.example.markprime.test.Network.NetworkManager;
-import com.example.markprime.test.Network.VolleySingletonErrorListener;
 import com.example.markprime.test.Network.VolleySingletonListener;
 import com.example.markprime.test.R;
 import com.example.markprime.test.utils.SharedPrefs;
@@ -122,13 +121,6 @@ public class EventsFragment extends Fragment implements EventsAdapterListener {
                 setAdapter();
 
                 Log.d("RESPONSE", object.toString());
-            }
-        }, new VolleySingletonErrorListener() {
-            @Override
-            public void onErrorResult(Exception error) {
-
-
-                Log.d("ERROR", error.getMessage() + " ");
             }
         });
     }
