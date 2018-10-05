@@ -80,9 +80,14 @@ public class DiscoverFragment extends Fragment
         setUpRecyclerView(view);
         setUpSwipeRefreshLayout(view);
 
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        context.registerReceiver(receiver, intentFilter);
+
 //        fragmentInteractionListener.showNavBar();
 
         getDiscoveryData();
+        setAdapter();
 
         return view;
     }
@@ -125,6 +130,7 @@ public class DiscoverFragment extends Fragment
                 re_discover.setAdapter(null);
                 discoverAdapter = null;
                 getDiscoveryData();
+                setAdapter();
             }
         });
     }
@@ -145,23 +151,41 @@ public class DiscoverFragment extends Fragment
 
     private void getDiscoveryData(){
 
-        NetworkManager.getInstance(context).exampleGetRequest(
-                "https://www.skiddle.com/api/v1/discover/?api_key=ce3dcde502f88cb2546467fe272ba50b&userid=91&platform=android", new VolleySingletonListener<JSONObject>() {
-
+        NetworkManager.getInstance(context)
+                .exampleGetRequest(
+                "https://www.skiddle.com/api/v1/discover/?api_key=ce3dcde502f88cb2546467fe272ba50b&userid=91&platform=android",
+                new VolleySingletonListener<JSONObject>() {
 
                     @Override
                     public void onResult(JSONObject object) {
 
-                        if (discoverLoaded = false) {
-                            txt_no_items_available.setVisibility(View.GONE);
-                            handleNetworkCallSuccessResponse(object);
-                            setSwipeRefreshNotRefreshing();
-
-                        } else {
-                            re_discover.setAdapter(discoverAdapter);
-                            swipe_refresh.setRefreshing(false);
+                        try {
+                            JSONArray dataArray = object.getJSONArray("results");
+                            Log.d("Discover Array Details", dataArray.toString());
+                            for (int i = 0; i < dataArray.length(); i++) {
+                                discoveryList.add(new DiscoverObject(dataArray.getJSONObject(i)));
+                                setSwipeRefreshNotRefreshing();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
+                });}
+
+
+//                    @Override
+//                    public void onResult(JSONObject object) {
+//
+//                        if (discoverLoaded = false) {
+//                            txt_no_items_available.setVisibility(View.GONE);
+//                            handleNetworkCallSuccessResponse(object);
+//                            setSwipeRefreshNotRefreshing();
+//
+//                        } else {
+//                            re_discover.setAdapter(discoverAdapter);
+//                            swipe_refresh.setRefreshing(false);
+//                        }
+//                    }
 
                     private void setSwipeRefreshNotRefreshing() {
                         if (swipe_refresh != null) {
@@ -169,26 +193,34 @@ public class DiscoverFragment extends Fragment
                         }
                     }
 
-                    private void handleNetworkCallSuccessResponse(JSONObject object) {
-                        discoveryList.clear();
-                        try {
-                            JSONArray dataArray = object.getJSONArray("results");
-                            Log.d("Discover Array Details", dataArray.toString());
-                            for (int i = 0; i < dataArray.length(); i++) {
-                                discoveryList.add(new DiscoverObject(dataArray.getJSONObject(i)));
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-//            fragmentInteractionListener.dismissLoader();
-                        }
+//                    private void handleNetworkCallSuccessResponse(JSONObject object) {
+////                        discoveryList.clear();
+//                        try {
+//                            JSONArray dataArray = object.getJSONArray("results");
+//                            Log.d("Discover Array Details", dataArray.toString());
+//                            for (int i = 0; i < dataArray.length(); i++) {
+//                                discoveryList.add(new DiscoverObject(dataArray.getJSONObject(i)));
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        } finally {
+////            fragmentInteractionListener.dismissLoader();
+//                        }
+//                    }
+//
+//
+//                });
+//    }
 
-//        discoverAdapter = new DiscoverAdapter(discoveryList, context,
-//                this, this);
-//        re_discover.setAdapter(discoverAdapter);
-                    }
-                });
-        discoverLoaded = true;
+    private void setAdapter(){
+        discoverAdapter = new DiscoverAdapter(discoveryList, context, this, this);
+        re_discover.setAdapter(discoverAdapter);
+        if(discoverAdapter == null){
+            discoverLoaded = false;
+        } else {
+            discoverLoaded = true;
+        }
+
     }
 
 
@@ -400,6 +432,7 @@ public class DiscoverFragment extends Fragment
             if(ni != null && ni.isConnectedOrConnecting()){
                 if(re_discover.getAdapter() == null){
                     getDiscoveryData();
+                    setAdapter();
                 }
             }
         }

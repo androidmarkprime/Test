@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.andexert.library.RippleView;
 import com.example.markprime.test.Checkout.CheckoutFragment;
+import com.example.markprime.test.Discover.DiscoverFragment;
 import com.example.markprime.test.EventDetails.EventDetailsFragment;
 import com.example.markprime.test.FragmentInteractionListener;
 import com.example.markprime.test.Home.Events.EventsFragment;
@@ -382,6 +383,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
                     break;
                 case 2:
                     EventBus.getDefault().post(new FragmentEvent("My Tickets", null));
+                case 3:
+                    EventBus.getDefault().post(new FragmentEvent("Discover", null));
                     break;
                 }
     }
@@ -395,10 +398,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentInteracti
                     return;
                 case "Saved Events":
                     transaction.replace(fl_vp__home.getId(), SavedEventsFragment.newInstance());
-
                     break;
                 case "My Tickets":
                     transaction.replace(fl_vp__home.getId(), MyTicketsFragment.newInstance());
+                    break;
+                case "Discover":
+                    transaction.replace(fl_vp__home.getId(), DiscoverFragment.newInstance());
                     break;
             }
 

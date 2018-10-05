@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.markprime.test.R;
-
 import java.util.List;
 
 public class ViewHolderFragmentAdapter extends FragmentPagerAdapter {
@@ -28,9 +26,7 @@ public class ViewHolderFragmentAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public int getCount() {
-        return fragmentList.size();
-    }
+    public int getCount() { return fragmentList.size(); }
 
     @Nullable
     @Override
@@ -42,6 +38,8 @@ public class ViewHolderFragmentAdapter extends FragmentPagerAdapter {
                 return "Saved Events";
             case 2:
                 return "My Tickets";
+            case 3:
+                return "Discover";
             default:
                 return "";
         }

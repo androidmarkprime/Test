@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.markprime.test.Discover.DiscoverFragment;
 import com.example.markprime.test.Home.Events.EventsFragment;
 import com.example.markprime.test.Home.MyTickets.MyTicketsFragment;
 import com.example.markprime.test.Home.SavedEvents.SavedEventsFragment;
@@ -74,6 +75,7 @@ public class ViewHolderFragment extends Fragment implements ViewHolderFragmentCo
         fragmentList.add(EventsFragment.newInstance());
         fragmentList.add(SavedEventsFragment.newInstance());
         fragmentList.add(MyTicketsFragment.newInstance());
+        fragmentList.add(DiscoverFragment.newInstance());
         pagerAdapter = new ViewHolderFragmentAdapter(getChildFragmentManager(), fragmentList, context);
         vp_home.setAdapter(pagerAdapter);
         tablayout_home.setSelectedTabIndicatorColor(getResources().
