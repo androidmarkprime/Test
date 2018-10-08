@@ -30,6 +30,7 @@ import com.example.markprime.test.utils.SharedPrefs;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -589,5 +590,13 @@ public class CheckoutFragment
     public void totalClicked(EventObject eventObject) {
         fragmentInteractionListener.openMyTicketsFragment(eventObject.getFullObject());
         sharedPrefs.addTicket(context, eventObject);
+
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vnd.android.cursor.item/event");
+        intent.putExtra("title", eventObject.getEventName());
+        intent.putExtra("description", eventObject.getDescription());
+        //not currently able to return correct date/time and location for the event.
+        startActivity(intent);
     }
 }
